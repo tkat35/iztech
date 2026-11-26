@@ -26,7 +26,7 @@ long olc() {
   digitalWrite(TRIG, LOW);  delayMicroseconds(2);
   digitalWrite(TRIG, HIGH); delayMicroseconds(10);
   digitalWrite(TRIG, LOW);
-  unsigned long sure = pulseIn(ECHO, HIGH, 25000);
+  unsigned long sure = pulseIn(ECHO, HIGH, 6000);   // En fazla ~1 m
   return sure == 0 ? 0 : sure / 58;
 }
 
@@ -35,7 +35,7 @@ void setup() {
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
   sur(0, 0);
-  delay(2000);
+  delay(3000);
 }
 
 void loop() {

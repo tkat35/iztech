@@ -1,5 +1,6 @@
 // 11. MESAFE + MOTOR + SERVO KISKAC: nesneye yaklas ve al
-// Mesafe sensoru onde sabit; servo kiskaci acar/kapatir.
+// Mesafe sensoru onde sabit ve kiskacin en az 5 cm gerisinde olmali
+// (cok yakindaki cismi sensor goremez). Servo kiskaci acar/kapatir.
 
 #include <Servo.h>
 
@@ -8,12 +9,15 @@ const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
 const byte SERVO_PIN = 3;
 
-const int YAKLASMA_HIZI = 70;
+const int YAKLASMA_HIZI = 80;
 const int AL_CM = 8;                  // Nesne kiskacin icine girdiginde olculen mesafe
 const int ACIK = 110, KAPALI = 55;    // 4. uygulamada buldugunuz acilar
+const unsigned long YAKLASMA_SINIRI = 10000;   // 10 sn'de nesneye varamazsa dur
 
 enum Adim { YAKLAS, AL, BITTI };
 Adim adim = YAKLAS;
+byte yakinSayaci = 0;
+unsigned long baslangic = 0;
 
 Servo kiskac;
 
@@ -32,7 +36,7 @@ long olc() {
   digitalWrite(TRIG, LOW);  delayMicroseconds(2);
   digitalWrite(TRIG, HIGH); delayMicroseconds(10);
   digitalWrite(TRIG, LOW);
-  unsigned long sure = pulseIn(ECHO, HIGH, 25000);
+  unsigned long sure = pulseIn(ECHO, HIGH, 6000);
   return sure == 0 ? 0 : sure / 58;
 }
 
@@ -43,16 +47,20 @@ void setup() {
   kiskac.attach(SERVO_PIN);
   kiskac.write(ACIK);
   sur(0, 0);
-  delay(2000);
+  delay(3000);
+  baslangic = millis();
 }
 
 void loop() {
   switch (adim) {
     case YAKLAS: {
+      if (millis() - baslangic > YAKLASMA_SINIRI) { sur(0, 0); adim = BITTI; break; }
       long cm = olc();
-      if (cm == 0)          sur(0, 0);                            // Olcum yok: bekle
-      else if (cm > AL_CM)  sur(YAKLASMA_HIZI, YAKLASMA_HIZI);    // Yaklas
-      else                  { sur(0, 0); adim = AL; }
+      if (cm > 0 && cm <= AL_CM) yakinSayaci++;     // Yakin olcumleri say
+      else yakinSayaci = 0;
+
+      if (yakinSayaci >= 3) { sur(0, 0); adim = AL; }   // 3 kez ust uste yakin: gercekten orada
+      else sur(YAKLASMA_HIZI, YAKLASMA_HIZI);
       break;
     }
     case AL:

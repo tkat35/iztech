@@ -47,9 +47,10 @@ void loop() {
     long cm = mesafeCm();
     Serial.print(ACILAR[i]);
     Serial.print(" derece: ");
-    if (cm == 0) Serial.println("olcum yok");
+    if (cm == 0) Serial.println("olcum yok (uzak sayildi)");
     else { Serial.print(cm); Serial.println(" cm"); }
-    if (cm > enUzak) { enUzak = cm; enIyiAci = ACILAR[i]; }
+    long deger = cm == 0 ? 400 : cm;    // 9. uygulamadaki gibi: olcum yok = acik
+    if (deger > enUzak) { enUzak = deger; enIyiAci = ACILAR[i]; }
   }
 
   Serial.print("En acik yon: ");

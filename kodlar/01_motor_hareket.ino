@@ -8,6 +8,7 @@ const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const int HIZ = 120;        // 0-255 arasi
 const int SAG_AYAR = 0;     // Robot sola kayiyorsa eksi (-10), saga kayiyorsa arti (+10)
 const int ILERI_MS = 1500;  // Ileri gitme suresi (ms)
+const int DONUS_HIZI = 100; // Donus hizi. Diger kodlarda da ayni deger kullanilir.
 const int DONUS_MS = 450;   // Tam 90 derece donene kadar bu sayiyi degistirin
 
 void motor(byte pwm, byte in1, byte in2, int hiz) {
@@ -30,7 +31,7 @@ void setup() {
 
   sur(HIZ, HIZ + SAG_AYAR);  delay(ILERI_MS);   // Ileri
   sur(0, 0);                 delay(500);
-  sur(HIZ, -HIZ);            delay(DONUS_MS);   // Yerinde saga don
+  sur(DONUS_HIZI, -DONUS_HIZI); delay(DONUS_MS); // Yerinde SAGA don: robot kendi sagina donmeli!
   sur(0, 0);                 delay(500);
   sur(HIZ, HIZ + SAG_AYAR);  delay(ILERI_MS);   // Yine ileri
   sur(0, 0);

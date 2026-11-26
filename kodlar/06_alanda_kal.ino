@@ -9,6 +9,7 @@ const bool SIYAH_LOW = true;
 
 const int HIZ = 90;
 const int GERI_MS = 400;
+const int DONUS_HIZI = 100; // 1. uygulamadaki deger
 const int DONUS_MS = 450;   // 1. uygulamada buldugunuz 90 derece suresi
 
 void motor(byte pwm, byte in1, byte in2, int hiz) {
@@ -32,7 +33,8 @@ void setup() {
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
-  delay(2000);
+  randomSeed(analogRead(A5));   // "Bir adim ote" icin: random() her acilista farkli olsun
+  delay(3000);
 }
 
 void loop() {
@@ -46,8 +48,8 @@ void loop() {
 
   sur(0, 0);       delay(100);
   sur(-HIZ, -HIZ); delay(GERI_MS);           // Kenardan geri cekil
-  if (solKenar) sur(HIZ, -HIZ);              // Kenar soldaysa saga don
-  else          sur(-HIZ, HIZ);              // Kenar sagdaysa sola don
+  if (solKenar) sur(DONUS_HIZI, -DONUS_HIZI);  // Kenar soldaysa saga don
+  else          sur(-DONUS_HIZI, DONUS_HIZI);  // Kenar sagdaysa sola don
   delay(DONUS_MS);
   sur(0, 0);       delay(100);
 }

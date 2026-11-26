@@ -1,22 +1,25 @@
 // 12. GOREV ZINCIRI: cizgide git, hedef bantta dur, yuku birak, geri cekil
-// Basta kiskac kapali ve nesneyi tutuyor. Hedef: cizginin sonundaki genis siyah bant.
+// Acilista kiskac acilir; 3 saniye icinde yuku kiskaca koyun, kiskac kapanir.
+// Hedef: cizginin sonundaki genis siyah bant.
 
 #include <Servo.h>
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte CIZGI[4] = {A0, A1, A2, A3};
-const bool SIYAH_LOW = true;
+const bool SIYAH_LOW = true;        // 2. uygulamadaki deger
 const byte SERVO_PIN = 3;
 
-const int HIZ = 80, YAVAS = 35, ARA = 55;
-const int ACIK = 110, KAPALI = 55;
+const int HIZ = 80, YAVAS = 40, ARA = 70;   // 7. uygulamadaki degerler
+const int ACIK = 110, KAPALI = 55;          // 4. uygulamadaki acilar
 const byte BANT_OKUMA = 5;          // Bandi kac kez ust uste gorunce durulsun
+const unsigned long ARAMA_MS = 1500;
 
 enum Adim { GIT, BIRAK, BITTI };
 Adim adim = GIT;
 byte bantSayaci = 0;
 int sonYon = 0;
+unsigned long kayipBaslangic = 0;
 bool s[4];
 
 Servo kiskac;
@@ -38,24 +41,31 @@ bool cizgiVar(byte pin) {
 }
 
 void cizgiIzle() {
+  if (s[0] || s[1] || s[2] || s[3]) kayipBaslangic = 0;
   if (s[1] && s[2])  { sur(HIZ, HIZ);       sonYon = 0;  }
   else if (s[0])     { sur(YAVAS / 2, HIZ); sonYon = -1; }
   else if (s[1])     { sur(YAVAS, HIZ);     sonYon = -1; }
   else if (s[3])     { sur(HIZ, YAVAS / 2); sonYon = 1;  }
   else if (s[2])     { sur(HIZ, YAVAS);     sonYon = 1;  }
-  else if (sonYon < 0) sur(-ARA, ARA);
-  else if (sonYon > 0) sur(ARA, -ARA);
-  else                 sur(0, 0);
+  else {
+    if (kayipBaslangic == 0) kayipBaslangic = millis();
+    if (millis() - kayipBaslangic > ARAMA_MS) sur(0, 0);
+    else if (sonYon < 0) sur(-ARA, ARA);
+    else if (sonYon > 0) sur(ARA, -ARA);
+    else                 sur(0, 0);
+  }
 }
 
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
-  kiskac.attach(SERVO_PIN);
-  kiskac.write(KAPALI);             // Yuk elde
   sur(0, 0);
-  delay(2000);
+  kiskac.attach(SERVO_PIN);
+  kiskac.write(ACIK);               // Yuku koymak icin ac
+  delay(3000);
+  kiskac.write(KAPALI);             // Yuku tut
+  delay(1000);
 }
 
 void loop() {

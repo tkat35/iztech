@@ -206,6 +206,33 @@ td[rowspan]{font-weight:700;border-right:1px solid var(--line)}
 .score b{font-variant-numeric:tabular-nums}
 @media (max-width:820px){.algo-cards,.sim,.tune{grid-template-columns:minmax(0,1fr)}}
 
+/* home */
+.wokwi{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:28px;padding:22px 24px;background:#fff;border:2px solid var(--ink);border-radius:14px}
+.wokwi h3{margin:0 0 6px}
+.wokwi p{margin:0 0 10px;font-size:15px;color:var(--ink-2)}
+.wokwi-legend{margin:0;font-size:15px}
+.wokwi-legend dt{font-weight:800;margin-top:10px}
+.wokwi-legend dt:first-child{margin-top:0}
+.wokwi-legend dd{margin:2px 0 0;color:var(--ink-2)}
+#evde pre{background:#17202a;color:#e7ecef;border-radius:8px;max-height:300px}
+#evde pre code{padding:0;background:none;color:inherit;font-size:12.5px}
+.home-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px}
+.home{padding:20px 22px;background:var(--card);border:2px solid var(--ink);border-radius:var(--r);min-width:0}
+.home h3{display:flex;flex-direction:column;margin:0 0 12px;font-size:21px}
+.home h3 span{font-size:14px;color:var(--bordo);font-weight:700}
+.quiz{margin:0 0 12px;padding:12px 14px;border:2px solid var(--line);border-radius:10px}
+.quiz legend{padding:0 4px;font-weight:700;font-size:15px}
+.quiz code{padding:1px 5px;border-radius:4px;background:#efe8dc;font-size:13px}
+.quiz label{display:flex;align-items:center;gap:10px;min-height:40px;font-size:15px;cursor:pointer}
+.quiz input{width:20px;height:20px;accent-color:var(--bordo)}
+.quiz-fb{margin:4px 0 0;font-size:14px;font-weight:700;min-height:1.2em}
+.quiz.ok{border-color:var(--ok)}
+.quiz.ok .quiz-fb{color:var(--ok)}
+.quiz.no .quiz-fb{color:var(--bordo)}
+.task{margin-top:10px;padding:12px 14px;border-radius:10px;background:#f3ede2;font-size:15px}
+.task b{display:block;margin-bottom:2px}
+@media (max-width:820px){.wokwi,.home-grid{grid-template-columns:minmax(0,1fr)}}
+
 /* letter */
 .letter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
 .q{margin-bottom:18px}
@@ -327,7 +354,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
   .wiring{grid-template-columns:1fr}
 }
 @media (max-width:760px){.ex-grid{grid-template-columns:minmax(0,1fr)}}
-@media (max-width:1100px){
+.nav a,.logo{white-space:nowrap}
+@media (max-width:1320px){
   .top .wrap{flex-wrap:wrap;gap:8px 20px;padding-top:8px;padding-bottom:8px}
   .nav{order:3;width:100%;margin-left:0;overflow-x:auto;gap:6px;padding-bottom:4px;scrollbar-width:none}
   .nav a{flex:0 0 auto;display:inline-flex;align-items:center;min-height:36px;padding:4px 12px;border:1.5px solid var(--line);border-radius:99px;background:var(--card)}
@@ -375,6 +403,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
       <a href="#temel">Uygulamalar</a>
       <a href="#algoritma">P / PD</a>
       <a href="#senaryolar">Senaryolar</a>
+      <a href="#evde">Evde</a>
       <a href="#mektup">Mektup</a>
       <a href="#roller">Roller</a>
       <a href="#prova">Tema provası</a>
@@ -493,8 +522,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
             <tr><td>ENB (sağ motor hızı)</td><td>6</td></tr>
             <tr><td>IN3 (sağ motor yönü)</td><td>9</td></tr>
             <tr><td>IN4 (sağ motor yönü)</td><td>10</td></tr>
-            <tr><td>Güç girişi (+12V yazan)</td><td>Pilin artı ucu (en son)</td></tr>
-            <tr><td>GND</td><td>Pilin eksi ucu ve Arduino GND</td></tr>
+            <tr><td>Güç girişi (+12V yazan)</td><td>Motor pilinin artı ucu (en son)</td></tr>
+            <tr><td>GND</td><td>Motor pilinin eksi ucu ve Arduino GND</td></tr>
+            <tr><td>Arduino pili</td><td>Artı ve eksi</td><td>DC soketi ya da Vin ve GND</td></tr>
             <tr><td rowspan="4">Mesafe sensörü (HC-SR04 / HY-SRF05)</td><td>VCC</td><td>5V</td></tr>
             <tr><td>TRIG</td><td>11</td></tr>
             <tr><td>ECHO</td><td>12</td></tr>
@@ -523,7 +553,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
             <li><b>USB kablosu takılıyken robotu sürmeyin.</b> Kodu yükleyin, kabloyu çıkarın, sonra RESET'e basın.</li>
           </ol>
         </div>
-        <div class="note"><b>Besleme düzeni</b>Kod yüklerken Arduino USB'den beslenir. Robot sürülürken Arduino'yu öğretmenin gösterdiği yoldan besleyin. Motorlar her zaman pilden ve sürücüden beslenir. Sensörler ve tek bir küçük servo Arduino'nun 5V'undan beslenebilir. Pilin eksi ucu, sürücünün GND'si ve Arduino'nun GND'si birbirine bağlı olmalı.</div>
+        <div class="note"><b>Besleme düzeni: iki ayrı pil</b>Arduino kendi pilinden beslenir (yuvarlak DC soketi ya da Vin–GND). Motorlar ayrı bir pilden, sürücü üzerinden beslenir. L298N'in 5V çıkışını Arduino'ya bağlamayın. Sensörler ve tek bir küçük servo Arduino'nun 5V'undan beslenir. Motor pilinin eksi ucu, sürücünün GND'si ve Arduino'nun GND'si birbirine bağlı olmalı; yoksa motorlar komut almaz. Kod yüklerken Arduino USB'den beslenir.</div>
         <div class="note"><b>Bağlamadan önce: ENA / ENB köprüsü</b>L298N'deki ENA ve ENB üzerindeki küçük köprüyü (jumper) çıkarın. Köprü takılıyken motor hep tam hızla döner ve Arduino'nun pini zorlanır.</div>
         <p class="muted">Bu pinler bizim eğitim setimiz içindir. Yarışmada parçalar farklıysa kodun başındaki pin satırlarını değiştirirsiniz; ama hız (ENA, ENB) yalnız 3, 5, 6 ya da 11. pine bağlanabilir, servo varken 9 ve 10 hız için kullanılamaz. HY-SRF05'in OUT pini boş kalır.</p>
       </div>
@@ -2323,6 +2353,529 @@ void loop() {
   </div>
 </section>
 
+<!-- HOME -->
+<section id="evde">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Evde: robot olmadan çalış</h2>
+      <p>Robot okulda kalıyor. Evde her dersten sonra yaklaşık 15 dakika: üç soru, bir Wokwi görevi. İsteğe bağlıdır; takıldığınız yeri Perşembe sorun.</p>
+    </div>
+
+    <div class="wokwi">
+      <div class="wokwi-text">
+        <h3>Sanal robotumuz (Wokwi)</h3>
+        <p>Wokwi, tarayıcıda çalışan ücretsiz bir Arduino simülatörü. Sanal robotumuzun pinleri gerçek robotla aynı; bu sayfadaki bütün kodlar Wokwi'de olduğu gibi çalışır. Hesap açmanız gerekmez; sekmeyi kapatınca çalışmanız silinir.</p>
+        <ol class="steps">
+          <li><a href="https://wokwi.com/projects/new/arduino-uno" target="_blank" rel="noreferrer">wokwi.com/projects/new/arduino-uno</a> sayfasını açın.</li>
+          <li><b>diagram.json</b> sekmesine tıklayın, içindekilerin hepsini silin. Aşağıdaki <b>Devreyi kopyala</b> ile aldığınızı yapıştırın.</li>
+          <li><b>sketch.ino</b> sekmesine bu sayfadaki herhangi bir kodu yapıştırın.</li>
+          <li>Yeşil ▶ düğmesiyle başlatın.</li>
+        </ol>
+        <div class="paper-actions">
+          <button class="btn primary" type="button" data-copy="kwokwi">Devreyi kopyala</button>
+          <a class="btn" href="wokwi/diagram.json" download>diagram.json indir</a>
+        </div>
+      </div>
+      <dl class="wokwi-legend">
+        <dt>Mesafe sensörü (solda)</dt><dd>Simülasyon çalışırken sensöre tıklayın; kaydırıcıyla mesafeyi değiştirin.</dd>
+        <dt>Çizgi sensörü (alttaki 4 anahtar)</dt><dd>Soldan sağa: en sol göz … en sağ göz. Başta hepsi beyaz görür; bir anahtarı öbür yana kaydırınca o göz siyah görür.</dd>
+        <dt>Motorlar (üstteki 6 LED)</dt><dd>Yeşil = ileri, kırmızı = geri, sarı = hız (ne kadar parlaksa o kadar hızlı). Soldaki üçlü sol motor, sağdaki üçlü sağ motor.</dd>
+        <dt>Servo (sağda)</dt><dd>Kolu, koddaki açıya döner.</dd>
+        <dt>Wokwi'de olmayanlar</dt><dd>Gerçek motor, tekerlek ve zemin yok. Dönüş süresi, hız ve sensör yüksekliği gibi ayarlar robotta bulunur.</dd>
+      </dl>
+    </div>
+    <details class="helper" style="margin-top:12px">
+      <summary>Devre dosyasını göster (diagram.json)</summary>
+      <pre><code id="kwokwi" data-src="wokwi/diagram.json">{
+  "version": 1,
+  "author": "Odemis BILSEM TYY",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sonar",
+      "top": -40,
+      "left": -230,
+      "attrs": {
+        "distance": "30"
+      }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo",
+      "top": 20,
+      "left": 330,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "solGeri",
+      "top": -190,
+      "left": -40,
+      "attrs": {
+        "color": "red",
+        "label": "Sol geri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "solIleri",
+      "top": -190,
+      "left": 5,
+      "attrs": {
+        "color": "green",
+        "label": "Sol ileri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "solHiz",
+      "top": -190,
+      "left": 50,
+      "attrs": {
+        "color": "yellow",
+        "label": "Sol hız"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "sagGeri",
+      "top": -190,
+      "left": 170,
+      "attrs": {
+        "color": "red",
+        "label": "Sağ geri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "sagIleri",
+      "top": -190,
+      "left": 215,
+      "attrs": {
+        "color": "green",
+        "label": "Sağ ileri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "sagHiz",
+      "top": -190,
+      "left": 260,
+      "attrs": {
+        "color": "yellow",
+        "label": "Sağ hız"
+      }
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s1",
+      "top": 250,
+      "left": 150,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s2",
+      "top": 250,
+      "left": 195,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s3",
+      "top": 250,
+      "left": 240,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s4",
+      "top": 250,
+      "left": 285,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "sonar:TRIG",
+      "uno:11",
+      "orange",
+      [
+        "v-70",
+        "h290"
+      ]
+    ],
+    [
+      "sonar:ECHO",
+      "uno:12",
+      "purple",
+      [
+        "v-60",
+        "h270"
+      ]
+    ],
+    [
+      "sonar:VCC",
+      "uno:5V",
+      "red",
+      [
+        "v160"
+      ]
+    ],
+    [
+      "sonar:GND",
+      "uno:GND.2",
+      "black",
+      [
+        "v170"
+      ]
+    ],
+    [
+      "servo:PWM",
+      "uno:3",
+      "orange",
+      [
+        "h-20",
+        "v-110"
+      ]
+    ],
+    [
+      "servo:V+",
+      "uno:5V",
+      "red",
+      [
+        "h-10",
+        "v110"
+      ]
+    ],
+    [
+      "servo:GND",
+      "uno:GND.3",
+      "black",
+      [
+        "h-15",
+        "v120"
+      ]
+    ],
+    [
+      "uno:8",
+      "solGeri:A",
+      "red",
+      []
+    ],
+    [
+      "uno:7",
+      "solIleri:A",
+      "green",
+      []
+    ],
+    [
+      "uno:5",
+      "solHiz:A",
+      "gold",
+      []
+    ],
+    [
+      "uno:10",
+      "sagGeri:A",
+      "red",
+      []
+    ],
+    [
+      "uno:9",
+      "sagIleri:A",
+      "green",
+      []
+    ],
+    [
+      "uno:6",
+      "sagHiz:A",
+      "gold",
+      []
+    ],
+    [
+      "solGeri:C",
+      "solIleri:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "solIleri:C",
+      "solHiz:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "solHiz:C",
+      "sagGeri:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "sagGeri:C",
+      "sagIleri:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "sagIleri:C",
+      "sagHiz:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "solGeri:C",
+      "uno:GND.1",
+      "black",
+      [
+        "v30"
+      ]
+    ],
+    [
+      "s1:2",
+      "uno:A0",
+      "blue",
+      []
+    ],
+    [
+      "s2:2",
+      "uno:A1",
+      "blue",
+      []
+    ],
+    [
+      "s3:2",
+      "uno:A2",
+      "blue",
+      []
+    ],
+    [
+      "s4:2",
+      "uno:A3",
+      "blue",
+      []
+    ],
+    [
+      "s1:1",
+      "s2:1",
+      "red",
+      [
+        "v20",
+        "*",
+        "v20"
+      ]
+    ],
+    [
+      "s1:3",
+      "s2:3",
+      "black",
+      [
+        "v32",
+        "*",
+        "v32"
+      ]
+    ],
+    [
+      "s2:1",
+      "s3:1",
+      "red",
+      [
+        "v20",
+        "*",
+        "v20"
+      ]
+    ],
+    [
+      "s2:3",
+      "s3:3",
+      "black",
+      [
+        "v32",
+        "*",
+        "v32"
+      ]
+    ],
+    [
+      "s3:1",
+      "s4:1",
+      "red",
+      [
+        "v20",
+        "*",
+        "v20"
+      ]
+    ],
+    [
+      "s3:3",
+      "s4:3",
+      "black",
+      [
+        "v32",
+        "*",
+        "v32"
+      ]
+    ],
+    [
+      "s1:1",
+      "uno:5V",
+      "red",
+      [
+        "v20"
+      ]
+    ],
+    [
+      "s1:3",
+      "uno:GND.2",
+      "black",
+      [
+        "v32"
+      ]
+    ]
+  ],
+  "dependencies": {}
+}</code></pre>
+    </details>
+
+    <div class="home-grid">
+
+      <article class="home" id="evde1">
+        <h3><span>Ders 1'den sonra</span>Parçayı tanı</h3>
+        <fieldset class="quiz" data-answer="a" data-hint="# siyah demek; soldaki iki göz siyah görüyor.">
+          <legend>Seri Monitör'de <code># # . .</code> görüyorsunuz. Çizgi nerede?</legend>
+          <label><input type="radio" name="e1q1" value="a"> Solda</label>
+          <label><input type="radio" name="e1q1" value="b"> Sağda</label>
+          <label><input type="radio" name="e1q1" value="c"> Ortada</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="a" data-hint="Süre uzarsa robot daha çok döner.">
+          <legend>Robot 90° yerine 70° dönüyor. <code>DONUS_MS</code>'yi ne yaparsınız?</legend>
+          <label><input type="radio" name="e1q2" value="a"> Artırırım</label>
+          <label><input type="radio" name="e1q2" value="b"> Azaltırım</label>
+          <label><input type="radio" name="e1q2" value="c"> Değiştirmem, hızı artırırım</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="b" data-hint="Sensör ses gönderir ve yankısını bekler; yumuşak yüzey sesi yutar.">
+          <legend>Mesafe sensörü kumaşa bakınca "ölçüm yok" diyor. Neden?</legend>
+          <label><input type="radio" name="e1q3" value="a"> Sensör bozulmuştur</label>
+          <label><input type="radio" name="e1q3" value="b"> Ses dalgası geri yansımamıştır</label>
+          <label><input type="radio" name="e1q3" value="c"> Kumaş çok uzaktadır</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <div class="task"><b>Wokwi görevi</b> <a href="#u3">3. uygulamanın</a> kodunu çalıştırın. Mesafeyi 10, 50 ve 150 cm yapın; Seri Monitör'deki çubuk nasıl değişiyor? Sonra <a href="#u2">2. uygulamanın</a> koduyla anahtarları kaydırıp "çizgi solda / ortada / sağda" yazdırın.</div>
+      </article>
+
+      <article class="home" id="evde2">
+        <h3><span>Ders 2'den sonra</span>İki parça birlikte</h3>
+        <fieldset class="quiz" data-answer="a" data-hint="Kural: iki iç göz siyahsa düz git.">
+          <legend>7. kodda iki iç göz siyah, dış gözler beyaz. Robot ne yapar?</legend>
+          <label><input type="radio" name="e2q1" value="a"> Düz gider</label>
+          <label><input type="radio" name="e2q1" value="b"> Sola döner</label>
+          <label><input type="radio" name="e2q1" value="c"> Durur</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="a" data-hint="Sol motor = temel hız + Kp × hata = 100 + 25 × (−2).">
+          <legend>P kontrolde hata −2, <code>KP</code> 25, temel hız 100. Sol motorun hızı kaç olur?</legend>
+          <label><input type="radio" name="e2q2" value="a"> 50</label>
+          <label><input type="radio" name="e2q2" value="b"> 150</label>
+          <label><input type="radio" name="e2q2" value="c"> 100</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="b" data-hint="Kp büyükse robot her küçük hatada sert düzeltir.">
+          <legend>Robot düz yolda bile sağa sola sallanıyor. Ne yaparsınız?</legend>
+          <label><input type="radio" name="e2q3" value="a"> Kp'yi artırırım</label>
+          <label><input type="radio" name="e2q3" value="b"> Kp'yi azaltırım</label>
+          <label><input type="radio" name="e2q3" value="c"> Temel hızı artırırım</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <div class="task"><b>Wokwi görevi</b> <a href="#u7">7. uygulamanın</a> kodunu çalıştırın. Önce iki ortadaki anahtarı "siyah" yapın: hangi LED'ler yanıyor? Sonra yalnız en soldakini siyah bırakın: hangi motor yavaşladı? Hepsini beyaz yapınca 1,5 saniye sonra ne oluyor?</div>
+        <div class="task"><b>Simülatör görevi</b> <a href="#sim">Simülatörde</a> P'yi seçin, yalnız sol dış gözü siyah yapın. Kp'yi 10'dan 50'ye çıkarın: "sert" yazısı hangi değerde başlıyor?</div>
+      </article>
+
+      <article class="home" id="evde3">
+        <h3><span>Ders 3'ten sonra</span>Küçük görevler</h3>
+        <fieldset class="quiz" data-answer="c" data-hint="Önce gider, sonra bırakır, en son durur.">
+          <legend>12. koddaki görev adımlarının sırası hangisi?</legend>
+          <label><input type="radio" name="e3q1" value="a"> BIRAK → GIT → BITTI</label>
+          <label><input type="radio" name="e3q1" value="b"> GIT → BITTI → BIRAK</label>
+          <label><input type="radio" name="e3q1" value="c"> GIT → BIRAK → BITTI</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="b" data-hint="Ses çok kısa sürede döner; sensör bu kadar yakını ölçemez.">
+          <legend>11. uygulamada sensör neden kıskacın 5 cm gerisinde?</legend>
+          <label><input type="radio" name="e3q2" value="a"> Daha güzel görünsün diye</label>
+          <label><input type="radio" name="e3q2" value="b"> Sensör çok yakındaki cismi göremez</label>
+          <label><input type="radio" name="e3q2" value="c"> Servo sensöre çarpmasın diye</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="a" data-hint="Az önce yakında bir şey vardı; yankının kaybolması onun hâlâ orada olabileceğini gösterir.">
+          <legend>Engelden kaçan robot (9) az önce 25 cm'de bir şey gördü, şimdi "ölçüm yok" aldı. Ne yapar?</legend>
+          <label><input type="radio" name="e3q3" value="a"> Engel var sayar, durur</label>
+          <label><input type="radio" name="e3q3" value="b"> Yol açık sayar, hızlanır</label>
+          <label><input type="radio" name="e3q3" value="c"> Geri gider</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <div class="task"><b>Wokwi görevi</b> <a href="#u8">8. uygulamanın</a> (radar) kodunu çalıştırın. Servo dönerken mesafeyi değiştirin; Seri Monitör en açık yönü doğru söylüyor mu? Sonra <a href="#u9">9. uygulamayı</a> deneyin: mesafeyi 15 cm'ye indirince LED'ler ve servo ne yapıyor?</div>
+        <div class="task"><b>Simülatör görevi</b> PD'yi seçin. Kd'yi önce 0, sonra 30 yapın ve bir gözü değiştirin. D terimi neden yalnız değiştirdiğiniz anda görünüyor?</div>
+      </article>
+
+      <article class="home" id="evde4">
+        <h3><span>Yarışmadan önce</span>Son hazırlık</h3>
+        <fieldset class="quiz" data-answer="b" data-hint="Işık itirazı kabul edilmiyor; ayarı sahada siz yaparsınız.">
+          <legend>Yarışmada pistin ışığı okuldakinden farklı. Ne yaparsınız?</legend>
+          <label><input type="radio" name="e4q1" value="a"> Hakeme itiraz ederim</label>
+          <label><input type="radio" name="e4q1" value="b"> Çizgi sensörünü orada yeniden ayarlarım</label>
+          <label><input type="radio" name="e4q1" value="c"> Hiçbir şey yapmam</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="c" data-hint="Bant, yapıştırıcı ve makaron K'Nex'e kalıcı zarar sayılır.">
+          <legend>Motoru K'Nex gövdeye nasıl tutturursunuz?</legend>
+          <label><input type="radio" name="e4q2" value="a"> Bantla</label>
+          <label><input type="radio" name="e4q2" value="b"> Sıcak silikonla</label>
+          <label><input type="radio" name="e4q2" value="c"> Kablo bağıyla (organizasyona sorulacak)</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <fieldset class="quiz" data-answer="b" data-hint="Koç yönlendirme yapamaz; kararları ekip verir.">
+          <legend>Yarışma sırasında öğretmeniniz robota bakıp ipucu verebilir mi?</legend>
+          <label><input type="radio" name="e4q3" value="a"> Evet</label>
+          <label><input type="radio" name="e4q3" value="b"> Hayır</label>
+          <p class="quiz-fb" aria-live="polite"></p>
+        </fieldset>
+        <div class="task"><b>Wokwi görevi</b> <a href="#kod">Başlangıç taslağını</a> çalıştırın, Seri Monitör'ü açın. Adım numaraları: 1 çizgi takip, 2 yaklaş, 3 al, 4 dön, 5 bırak, 6 bitti. Mesafeyi önce 20, sonra 8 cm yapın; adımlar sırayla ilerliyor mu? 5'e gelince dört anahtarı birden siyah yapın: robot durup kolu açıyor mu?</div>
+        <div class="task"><b>Ekipçe</b> <a href="#canta">Çanta listesini</a> birlikte işaretleyin ve <a href="#gun">24 saat planını</a> bir kez okuyun.</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
 <!-- LETTER -->
 <section id="mektup">
   <div class="wrap">
@@ -2815,6 +3368,15 @@ void loop() {
     if (!text) { toast('Önce soruları cevaplayın'); return; }
     toast(await copyText(text) ? 'Taslak kopyalandı' : 'Kopyalanamadı, metni seçip kopyalayın');
   });
+
+  // Home quizzes: instant feedback
+  $$('.quiz').forEach(q => q.addEventListener('change', e => {
+    if (e.target.type !== 'radio') return;
+    const ok = e.target.value === q.dataset.answer;
+    q.classList.toggle('ok', ok);
+    q.classList.toggle('no', !ok);
+    $('.quiz-fb', q).textContent = ok ? 'Doğru!' : 'Tekrar düşün. İpucu: ' + q.dataset.hint;
+  }));
 
   // Robot values card
   const valueFields = $$('[data-v]');

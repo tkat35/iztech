@@ -1,0 +1,376 @@
+{
+  "version": 1,
+  "author": "Odemis BILSEM TYY",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-arduino-uno",
+      "id": "uno",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "sonar",
+      "top": -40,
+      "left": -230,
+      "attrs": {
+        "distance": "30"
+      }
+    },
+    {
+      "type": "wokwi-servo",
+      "id": "servo",
+      "top": 20,
+      "left": 330,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-led",
+      "id": "solGeri",
+      "top": -190,
+      "left": -40,
+      "attrs": {
+        "color": "red",
+        "label": "Sol geri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "solIleri",
+      "top": -190,
+      "left": 5,
+      "attrs": {
+        "color": "green",
+        "label": "Sol ileri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "solHiz",
+      "top": -190,
+      "left": 50,
+      "attrs": {
+        "color": "yellow",
+        "label": "Sol hız"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "sagGeri",
+      "top": -190,
+      "left": 170,
+      "attrs": {
+        "color": "red",
+        "label": "Sağ geri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "sagIleri",
+      "top": -190,
+      "left": 215,
+      "attrs": {
+        "color": "green",
+        "label": "Sağ ileri"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "sagHiz",
+      "top": -190,
+      "left": 260,
+      "attrs": {
+        "color": "yellow",
+        "label": "Sağ hız"
+      }
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s1",
+      "top": 250,
+      "left": 150,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s2",
+      "top": 250,
+      "left": 195,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s3",
+      "top": 250,
+      "left": 240,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-switch",
+      "id": "s4",
+      "top": 250,
+      "left": 285,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [
+      "sonar:TRIG",
+      "uno:11",
+      "orange",
+      [
+        "v-70",
+        "h290"
+      ]
+    ],
+    [
+      "sonar:ECHO",
+      "uno:12",
+      "purple",
+      [
+        "v-60",
+        "h270"
+      ]
+    ],
+    [
+      "sonar:VCC",
+      "uno:5V",
+      "red",
+      [
+        "v160"
+      ]
+    ],
+    [
+      "sonar:GND",
+      "uno:GND.2",
+      "black",
+      [
+        "v170"
+      ]
+    ],
+    [
+      "servo:PWM",
+      "uno:3",
+      "orange",
+      [
+        "h-20",
+        "v-110"
+      ]
+    ],
+    [
+      "servo:V+",
+      "uno:5V",
+      "red",
+      [
+        "h-10",
+        "v110"
+      ]
+    ],
+    [
+      "servo:GND",
+      "uno:GND.3",
+      "black",
+      [
+        "h-15",
+        "v120"
+      ]
+    ],
+    [
+      "uno:8",
+      "solGeri:A",
+      "red",
+      []
+    ],
+    [
+      "uno:7",
+      "solIleri:A",
+      "green",
+      []
+    ],
+    [
+      "uno:5",
+      "solHiz:A",
+      "gold",
+      []
+    ],
+    [
+      "uno:10",
+      "sagGeri:A",
+      "red",
+      []
+    ],
+    [
+      "uno:9",
+      "sagIleri:A",
+      "green",
+      []
+    ],
+    [
+      "uno:6",
+      "sagHiz:A",
+      "gold",
+      []
+    ],
+    [
+      "solGeri:C",
+      "solIleri:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "solIleri:C",
+      "solHiz:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "solHiz:C",
+      "sagGeri:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "sagGeri:C",
+      "sagIleri:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "sagIleri:C",
+      "sagHiz:C",
+      "black",
+      [
+        "v30",
+        "*",
+        "v30"
+      ]
+    ],
+    [
+      "solGeri:C",
+      "uno:GND.1",
+      "black",
+      [
+        "v30"
+      ]
+    ],
+    [
+      "s1:2",
+      "uno:A0",
+      "blue",
+      []
+    ],
+    [
+      "s2:2",
+      "uno:A1",
+      "blue",
+      []
+    ],
+    [
+      "s3:2",
+      "uno:A2",
+      "blue",
+      []
+    ],
+    [
+      "s4:2",
+      "uno:A3",
+      "blue",
+      []
+    ],
+    [
+      "s1:1",
+      "s2:1",
+      "red",
+      [
+        "v20",
+        "*",
+        "v20"
+      ]
+    ],
+    [
+      "s1:3",
+      "s2:3",
+      "black",
+      [
+        "v32",
+        "*",
+        "v32"
+      ]
+    ],
+    [
+      "s2:1",
+      "s3:1",
+      "red",
+      [
+        "v20",
+        "*",
+        "v20"
+      ]
+    ],
+    [
+      "s2:3",
+      "s3:3",
+      "black",
+      [
+        "v32",
+        "*",
+        "v32"
+      ]
+    ],
+    [
+      "s3:1",
+      "s4:1",
+      "red",
+      [
+        "v20",
+        "*",
+        "v20"
+      ]
+    ],
+    [
+      "s3:3",
+      "s4:3",
+      "black",
+      [
+        "v32",
+        "*",
+        "v32"
+      ]
+    ],
+    [
+      "s1:1",
+      "uno:5V",
+      "red",
+      [
+        "v20"
+      ]
+    ],
+    [
+      "s1:3",
+      "uno:GND.2",
+      "black",
+      [
+        "v32"
+      ]
+    ]
+  ],
+  "dependencies": {}
+}

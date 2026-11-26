@@ -1,0 +1,994 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#a3141f">
+<meta name="description" content="Ödemiş BİLSEM ekibinin IZTECH RoboLeague Tasarla-Yap-Yarıştır hazırlık sayfası: geri sayım, haftalık plan, niyet mektubu, tema provası, kod modülleri ve çanta listesi.">
+<title>TYY Hazırlık · Ödemiş BİLSEM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#faf6ef; --card:#fffdf9; --ink:#1d1a17; --ink-2:#4f4943; --muted:#6b6159;
+  --line:#ddd4c6; --bordo:#a3141f; --bordo-dark:#7d0f18; --bordo-pale:#f6e3e1; --ok:#2f6b3a;
+  --r:10px;
+  font-family:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:var(--ink); background:var(--paper);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;line-height:1.55;font-size:16px}
+a{color:var(--bordo);text-underline-offset:3px}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--bordo);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:10;background:var(--paper);border-bottom:2px solid var(--ink)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:60px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;color:var(--ink);font-stretch:110%}
+.logo b{display:grid;place-items:center;min-width:34px;height:34px;padding:0 7px;border-radius:7px;background:var(--bordo);color:#fff;font-size:13px;letter-spacing:.02em;box-shadow:2px 2px 0 var(--ink)}
+.nav{display:flex;gap:18px;margin-left:auto;font-size:14px;font-weight:600}
+.nav a{color:var(--ink-2);text-decoration:none}
+.nav a:hover{color:var(--bordo)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:8px 16px;border:2px solid var(--ink);border-radius:8px;background:var(--card);font-weight:700;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--bordo);border-color:var(--bordo);color:#fff;box-shadow:3px 3px 0 var(--ink)}
+.btn.primary:hover{background:var(--bordo-dark)}
+.btn.small{min-height:34px;padding:5px 11px;font-size:13px}
+
+/* hero */
+.hero{padding:56px 0 64px;border-bottom:2px solid var(--ink)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:48px;align-items:center}
+.place{display:inline-flex;gap:10px;padding:6px 14px;border:2px solid var(--ink);border-radius:99px;font-size:14px;font-weight:600}
+h1{margin:22px 0 0;font-size:clamp(44px,7.2vw,92px);line-height:.92;font-weight:900;font-stretch:118%;letter-spacing:-.035em}
+.lead{max-width:34em;margin:22px 0 0;font-size:clamp(16px,1.8vw,19px);color:var(--ink-2)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+.pass{position:relative;background:var(--card);border:2px solid var(--ink);border-radius:14px;box-shadow:8px 8px 0 var(--ink);transform:rotate(-1.6deg)}
+.pass-head{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 22px 14px}
+.pass-head .tag{font-size:13px;color:var(--muted);text-align:right;line-height:1.3}
+.pass-team{padding:0 22px 16px}
+.pass-team label{display:block;font-size:13px;color:var(--muted)}
+.pass-team input{width:100%;margin-top:4px;padding:4px 0;border:0;border-bottom:2px dashed var(--line);background:transparent;font-size:26px;font-weight:800;font-stretch:112%}
+.pass-team input:focus{outline:none;border-bottom-color:var(--bordo)}
+.stubs{display:grid;grid-template-columns:1fr 1fr;border-top:2px dashed var(--ink)}
+.stub{padding:16px 22px}
+.stub + .stub{border-left:2px dashed var(--ink)}
+.stub small{display:block;font-size:13px;color:var(--muted)}
+.stub strong{display:block;font-size:44px;line-height:1;font-weight:900;font-stretch:120%;margin:6px 0 4px;font-variant-numeric:tabular-nums}
+.stub span{font-size:13px;font-weight:600}
+.stub.urgent strong{color:var(--bordo)}
+.pass::before,.pass::after{content:"";position:absolute;top:calc(100% - 104px);width:18px;height:18px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}
+.pass::before{left:-11px}.pass::after{right:-11px}
+.barcode{height:20px;margin:0 22px 18px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 5px,var(--ink) 5px 6px,transparent 6px 10px,var(--ink) 10px 13px,transparent 13px 15px);opacity:.85}
+
+/* sections */
+section{padding:64px 0;border-bottom:1px solid var(--line)}
+.sh{max-width:720px;margin-bottom:28px}
+h2{margin:0;font-size:clamp(28px,3.6vw,42px);line-height:1.05;font-weight:850;font-stretch:112%;letter-spacing:-.02em}
+.sh p{margin:12px 0 0;color:var(--ink-2)}
+h3{margin:0 0 6px;font-size:19px;font-weight:800}
+.note{padding:14px 18px;border-left:5px solid var(--bordo);background:var(--bordo-pale);border-radius:0 var(--r) var(--r) 0;font-size:15px}
+.note b{display:block}
+.muted{color:var(--muted);font-size:14px}
+
+/* weeks */
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink);border-radius:14px;overflow:hidden;background:var(--card)}
+.week{padding:20px 18px;border-right:2px solid var(--ink)}
+.week:last-child{border-right:0}
+.week.now{background:#fff6e0}
+.week-n{font-size:40px;font-weight:900;font-stretch:125%;line-height:1;color:var(--bordo)}
+.week h3{margin-top:8px}
+.week .when{font-size:13px;color:var(--muted);margin-bottom:12px}
+.week .now-flag{display:none;margin-left:6px;padding:1px 8px;border-radius:99px;background:var(--ink);color:var(--paper);font-size:12px;font-weight:700}
+.week.now .now-flag{display:inline-block}
+.check{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:15px;cursor:pointer}
+.check input{flex:0 0 auto;width:20px;height:20px;margin:2px 0 0;accent-color:var(--bordo)}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+.progress{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:14px;font-weight:600}
+.bar{flex:1;height:10px;border:2px solid var(--ink);border-radius:99px;overflow:hidden;background:var(--card)}
+.bar i{display:block;height:100%;width:0;background:var(--bordo);transition:width .3s}
+
+/* letter */
+.letter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+.q{margin-bottom:18px}
+.q label{display:block;font-weight:700}
+.q .hint{display:block;font-size:14px;color:var(--muted);margin:2px 0 6px}
+.q textarea{width:100%;min-height:92px;padding:10px 12px;border:2px solid var(--line);border-radius:8px;background:var(--card);resize:vertical;line-height:1.5}
+.q textarea:focus{outline:none;border-color:var(--bordo)}
+.paper{position:sticky;top:84px;padding:26px 28px;background:#fff;border:2px solid var(--ink);border-radius:6px;box-shadow:6px 6px 0 var(--line);min-height:380px;font-size:15px}
+.paper h3{font-size:17px}
+.paper p{margin:0 0 12px;white-space:pre-wrap}
+.paper .empty{color:var(--muted);font-style:italic}
+.paper-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+
+/* roles */
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.role{padding:18px 20px;background:var(--card);border:2px solid var(--ink);border-radius:var(--r)}
+.role .ico{font-size:26px;line-height:1}
+.role h3{margin-top:10px}
+.role p{margin:0 0 8px;font-size:15px;color:var(--ink-2)}
+.role .day{font-size:14px;padding-top:8px;border-top:1px dashed var(--line)}
+
+/* theme drill: the one bold element */
+.drill{background:var(--ink);color:var(--paper);border-bottom:0}
+.drill h2{color:#fff}
+.drill .sh p{color:#d8cfc3}
+.drill .note{background:#2b2622;color:#efe6da;border-left-color:#ff6b6b}
+.drill-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:32px;align-items:start}
+.envelope{position:relative;min-height:330px;padding:30px;background:var(--paper);color:var(--ink);border-radius:14px;box-shadow:8px 8px 0 var(--bordo)}
+.seal{display:grid;place-items:center;min-height:270px;text-align:center}
+.seal .wax{display:grid;place-items:center;width:110px;height:110px;margin:0 auto 18px;border-radius:50%;background:var(--bordo);color:#fff;font-weight:900;font-size:22px;font-stretch:120%;box-shadow:inset 0 0 0 6px var(--bordo-dark),0 4px 0 var(--bordo-dark)}
+.card-out{display:none}
+.envelope.open .seal{display:none}
+.envelope.open .card-out{display:block;animation:pull .45s ease-out}
+@keyframes pull{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+.card-out .kind{font-size:14px;color:var(--muted)}
+.card-out h3{font-size:clamp(24px,3vw,32px);line-height:1.1;font-weight:850;font-stretch:110%;margin:6px 0 18px}
+.rules-mini{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.rules-mini li{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:10px 0;border-top:1px dashed var(--line);font-size:15px}
+.rules-mini li b{font-size:14px;color:var(--bordo)}
+.env-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.timer{padding:24px;border:2px solid #4a423b;border-radius:14px}
+.dur{display:flex;gap:8px;margin-bottom:16px}
+.dur button{flex:1;min-height:40px;border:2px solid #6b625a;border-radius:8px;background:transparent;color:var(--paper);font-weight:700;cursor:pointer}
+.dur button[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.clock{font-size:clamp(56px,8vw,84px);font-weight:900;font-stretch:125%;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.phase{margin:10px 0 16px;font-size:17px;color:#ffd9d9;min-height:1.6em}
+.phases{display:flex;height:14px;border-radius:99px;overflow:hidden;margin-bottom:6px;background:#3a332d}
+.phases i{display:block;height:100%;border-right:2px solid var(--ink)}
+.phases i.done{background:#ff6b6b}
+.phases i.cur{background:#ffb3b3}
+.phase-legend{display:flex;justify-content:space-between;font-size:12px;color:#bfb4a7;gap:6px}
+.timer-actions{display:flex;gap:10px;margin-top:20px}
+.timer .btn{background:transparent;color:var(--paper);border-color:var(--paper)}
+.timer .btn:hover{background:var(--paper);color:var(--ink)}
+.timer .btn.primary{background:var(--bordo);border-color:var(--bordo);box-shadow:3px 3px 0 #000}
+
+/* code */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:-2px;position:relative;z-index:1}
+.tabs button{padding:10px 16px;border:2px solid var(--ink);border-bottom:0;border-radius:10px 10px 0 0;background:var(--paper);font-weight:700;cursor:pointer}
+.tabs button[aria-selected="true"]{background:#17202a;color:#fff;border-color:#17202a}
+.panel{border:2px solid #17202a;border-radius:0 12px 12px 12px;background:#17202a;color:#e7ecef;overflow:hidden}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 18px;border-bottom:1px solid #2f3b47;font-size:15px}
+.panel-head p{margin:0;color:#b8c4cc}
+.panel-head b{color:#fff}
+.panel .btn{background:transparent;color:#fff;border-color:#8fa1ad;flex:0 0 auto}
+.panel .btn:hover{background:#fff;color:#17202a}
+pre{margin:0;padding:18px;max-height:520px;overflow:auto;tab-size:2}
+code{font-family:ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;font-size:13.5px;line-height:1.6}
+.c{color:#8fb08a}
+.code-notes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.code-notes div{padding:14px 16px;border:2px solid var(--line);border-radius:var(--r);background:var(--card);font-size:15px}
+
+/* day plan */
+.day-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:32px}
+.timeline{margin:0;padding:0;list-style:none;border-left:3px solid var(--ink)}
+.timeline li{position:relative;padding:0 0 20px 24px}
+.timeline li::before{content:"";position:absolute;left:-10px;top:4px;width:14px;height:14px;border:3px solid var(--ink);border-radius:50%;background:var(--paper)}
+.timeline li.key::before{background:var(--bordo);border-color:var(--bordo)}
+.timeline .t{font-weight:800;font-stretch:115%;font-variant-numeric:tabular-nums}
+.timeline p{margin:2px 0 0;color:var(--ink-2);font-size:15px}
+.jury{padding:20px 22px;background:var(--card);border:2px solid var(--ink);border-radius:var(--r)}
+.jury dl{margin:12px 0 0}
+.jury dt{font-weight:800;margin-top:14px}
+.jury dd{margin:2px 0 0;font-size:15px;color:var(--ink-2)}
+
+/* bag + rules */
+.bag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.box{padding:20px 22px;background:var(--card);border:2px solid var(--ink);border-radius:var(--r)}
+.box.no{border-color:var(--bordo)}
+.box.no h3{color:var(--bordo)}
+.box ul{margin:8px 0 0;padding-left:20px;font-size:15px}
+.box li{margin:6px 0}
+.ask{margin-top:20px}
+
+.sources{padding:36px 0 48px;font-size:14px;color:var(--ink-2)}
+.sources ul{columns:2;column-gap:32px;padding-left:18px}
+.sources li{margin:4px 0;break-inside:avoid}
+footer{background:var(--ink);color:#d8cfc3;font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20px;padding-bottom:20px}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);padding:10px 18px;border-radius:8px;background:var(--ink);color:#fff;font-weight:600;transition:transform .25s;z-index:20}
+.toast.show{transform:translateX(-50%)}
+
+@media (max-width:980px){
+  .weeks{grid-template-columns:1fr 1fr}
+  .week:nth-child(2){border-right:0}
+  .week:nth-child(-n+2){border-bottom:2px solid var(--ink)}
+  .roles,.bag-grid,.code-notes{grid-template-columns:1fr 1fr}
+}
+@media (max-width:820px){
+  .nav{display:none}
+  .hero .wrap,.letter,.drill-grid,.day-grid{grid-template-columns:1fr}
+  .pass{transform:none;max-width:460px}
+  .paper{position:static;min-height:160px}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  section{padding:48px 0}
+  .weeks,.roles,.bag-grid,.code-notes{grid-template-columns:1fr}
+  .week{border-right:0;border-bottom:2px solid var(--ink)}
+  .week:last-child{border-bottom:0}
+  .stub strong{font-size:36px}
+  .rules-mini li{grid-template-columns:1fr;gap:2px}
+  .sources ul{columns:1}
+  footer .wrap{flex-direction:column}
+  .top .btn{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+@media print{
+  .top,.hero-actions,.env-actions,.timer,.paper-actions,.panel .btn,.tabs{display:none!important}
+  body,section,.drill{background:#fff!important;color:#000!important}
+  .drill h2,.drill .sh p{color:#000!important}
+  .pass,.envelope{box-shadow:none;transform:none}
+  section{padding:24px 0;break-inside:avoid-page}
+  .panel{background:#fff;color:#000;border-color:#000}
+  .panel[hidden]{display:block!important}
+  pre{max-height:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#basla"><b>TYY</b>Ödemiş BİLSEM ekibi</a>
+    <nav class="nav" aria-label="Sayfa bölümleri">
+      <a href="#plan">Plan</a>
+      <a href="#mektup">Niyet mektubu</a>
+      <a href="#roller">Roller</a>
+      <a href="#prova">Tema provası</a>
+      <a href="#kod">Kod</a>
+      <a href="#gun">24 saat</a>
+      <a href="#canta">Çanta</a>
+    </nav>
+    <button class="btn small" type="button" onclick="window.print()">Yazdır</button>
+  </div>
+</header>
+
+<main id="basla">
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <span class="place">İYTE kampüsü, Urla · 19–20 Aralık 2026</span>
+      <h1>24 saat.<br>Tek robot.<br>Sıfırdan.</h1>
+      <p class="lead">IZTECH RoboLeague Tasarla-Yap-Yarıştır'da tema yarışma sabahı açıklanır, malzemeyi organizasyon verir. Robotu orada tasarlayıp yapacağız. Bu sayfa, o güne kadar neyi hazır edeceğimizi gösteriyor.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#plan">Bu haftanın işleri</a>
+        <a class="btn" href="#prova">Tema provası yap</a>
+      </div>
+    </div>
+
+    <div class="pass" aria-label="Ekip pasosu">
+      <div class="pass-head">
+        <span class="logo" aria-hidden="true"><b>IRL</b></span>
+        <span class="tag">Katılımcı pasosu<br>Tasarla-Yap-Yarıştır</span>
+      </div>
+      <div class="pass-team">
+        <label for="teamName">Ekip adı</label>
+        <input id="teamName" type="text" maxlength="28" placeholder="Ekip adını yazın" autocomplete="off">
+      </div>
+      <div class="stubs">
+        <div class="stub urgent">
+          <small>Ön kayıt kapanıyor</small>
+          <strong id="dReg">–</strong>
+          <span>gün · 13 Aralık 23.59</span>
+        </div>
+        <div class="stub">
+          <small>Yarışmaya</small>
+          <strong id="dEvent">–</strong>
+          <span>gün · 19 Aralık</span>
+        </div>
+      </div>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PLAN -->
+<section id="plan">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Yarışmaya dört hafta</h2>
+      <p>Her hafta birkaç iş var. Bitirdiğinizi işaretleyin; işaretler bu bilgisayarda kalır. Bulunduğumuz hafta sarı görünür.</p>
+    </div>
+    <div class="weeks" id="weeks">
+      <div class="week" data-start="2026-11-23" data-end="2026-12-02">
+        <div class="week-n">1</div>
+        <h3>Ekip ve parçalar<span class="now-flag">Bu hafta</span></h3>
+        <div class="when">26 Kasım – 2 Aralık</div>
+        <label class="check"><input type="checkbox" data-k="w1a"><span>Ekibi (4–6 kişi) ve rolleri belirle</span></label>
+        <label class="check"><input type="checkbox" data-k="w1b"><span>Niyet mektubu sorularını cevapla</span></label>
+        <label class="check"><input type="checkbox" data-k="w1c"><span>Motor, çizgi, mesafe, servo testlerini tek tek çalıştır</span></label>
+        <label class="check"><input type="checkbox" data-k="w1d"><span>K'Nex ile 30 dakikada yürüyen bir şasi kur</span></label>
+      </div>
+      <div class="week" data-start="2026-12-03" data-end="2026-12-09">
+        <div class="week-n">2</div>
+        <h3>Taslak kod ve mekanizma<span class="now-flag">Bu hafta</span></h3>
+        <div class="when">3 – 9 Aralık</div>
+        <label class="check"><input type="checkbox" data-k="w2a"><span>Niyet mektubunu bitirip öğretmene teslim et</span></label>
+        <label class="check"><input type="checkbox" data-k="w2b"><span>Başlangıç taslağını robotta çalıştır</span></label>
+        <label class="check"><input type="checkbox" data-k="w2c"><span>İki mekanizma dene: kıskaç ve kepçe</span></label>
+        <label class="check"><input type="checkbox" data-k="w2d"><span>İlk tema provası (60 dakika)</span></label>
+      </div>
+      <div class="week" data-start="2026-12-10" data-end="2026-12-13">
+        <div class="week-n">3</div>
+        <h3>Kayıt ve hız<span class="now-flag">Bu hafta</span></h3>
+        <div class="when">10 – 13 Aralık</div>
+        <label class="check"><input type="checkbox" data-k="w3a"><span>Ön kayıt formu gönderildi (öğretmen, 13 Aralık 23.59'dan önce)</span></label>
+        <label class="check"><input type="checkbox" data-k="w3b"><span>İkinci tema provası (120 dakika)</span></label>
+        <label class="check"><input type="checkbox" data-k="w3c"><span>Veli izin belgesi çıktısı velilere verildi</span></label>
+      </div>
+      <div class="week" data-start="2026-12-14" data-end="2026-12-20">
+        <div class="week-n">4</div>
+        <h3>Son prova ve çanta<span class="now-flag">Bu hafta</span></h3>
+        <div class="when">14 – 18 Aralık</div>
+        <label class="check"><input type="checkbox" data-k="w4a"><span>Tam prova (180 dakika), sunum dahil</span></label>
+        <label class="check"><input type="checkbox" data-k="w4b"><span>Kodlar dizüstünde ve bir yedekte</span></label>
+        <label class="check"><input type="checkbox" data-k="w4c"><span>Çanta listesi tamam, Li-Po şarj cihazı denendi</span></label>
+        <label class="check"><input type="checkbox" data-k="w4d"><span>İmzalı veli izin belgeleri ve kimlikler toplandı</span></label>
+      </div>
+    </div>
+    <div class="progress"><span id="planPct">0 / 0</span><div class="bar" aria-hidden="true"><i id="planBar"></i></div></div>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section id="mektup">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Niyet mektubu</h2>
+      <p>12 ekip seçilecek ve seçim bu mektuba göre yapılacak. Dört soruya kendi cümlelerinizle cevap verin, sağda taslak oluşsun. Kısa ve dürüst yazın; yapmadığımız bir şeyi yazmıyoruz.</p>
+    </div>
+    <div class="letter">
+      <div>
+        <div class="q">
+          <label for="q1">Biz kimiz?</label>
+          <span class="hint">Okul, ekip adı, kaç kişiyiz, kim hangi işi yapıyor?</span>
+          <textarea id="q1" data-letter="0"></textarea>
+        </div>
+        <div class="q">
+          <label for="q2">Bugüne kadar ne yaptık?</label>
+          <span class="hint">Yaptığımız robotlar, katıldığımız yarışmalar, öğrendiklerimiz. Yalnızca gerçekten yaptıklarımız.</span>
+          <textarea id="q2" data-letter="1"></textarea>
+        </div>
+        <div class="q">
+          <label for="q3">Neden Tasarla-Yap-Yarıştır?</label>
+          <span class="hint">Tema bilmeden 24 saatte robot yapmak bize neden ilginç geliyor?</span>
+          <textarea id="q3" data-letter="2"></textarea>
+        </div>
+        <div class="q">
+          <label for="q4">Nasıl hazırlanıyoruz?</label>
+          <span class="hint">Rollerimiz, provalarımız, 24 saati nasıl planladığımız.</span>
+          <textarea id="q4" data-letter="3"></textarea>
+        </div>
+      </div>
+      <div>
+        <div class="paper" id="paper" aria-live="polite">
+          <h3>Tasarla-Yap-Yarıştır niyet mektubu</h3>
+          <div id="paperBody"><p class="empty">Soruları cevapladıkça mektup burada oluşur.</p></div>
+        </div>
+        <div class="paper-actions">
+          <button class="btn primary" type="button" id="copyLetter">Taslağı kopyala</button>
+        </div>
+        <p class="muted">Kopyaladığınız metni Word'e yapıştırıp düzenleyin, PDF olarak kaydedin. Yarışma sayfasında "TYY_ÖrnekNiyetMektubu" adlı bir örnek paylaşılmış; biçim için ona bakın, metnini kopyalamayın. Başvuru formunu öğretmenimiz gönderir.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section id="roller">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Kim ne yapar?</h2>
+      <p>24 saatte herkes her işe koşarsa zaman biter. Her rolün bir sahibi olsun; 4 kişiyseniz bazı rolleri birleştirin. Koç (öğretmen) yarışma sırasında yönlendirme yapamaz, kararları siz vereceksiniz.</p>
+    </div>
+    <div class="roles">
+      <article class="role"><div class="ico" aria-hidden="true">🧭</div><h3>Kaptan</h3><p>Plana ve saate bakar, kararları toplar, hakemle konuşur.</p><div class="day">Yarışmada: her 2 saatte bir "neredeyiz?" toplantısı.</div></article>
+      <article class="role"><div class="ico" aria-hidden="true">🧱</div><h3>Mekanik</h3><p>K'Nex şasi, tekerlek ve görev mekanizması (kıskaç, kepçe, kol).</p><div class="day">Yarışmada: ilk 6 saatte yürüyen gövde.</div></article>
+      <article class="role"><div class="ico" aria-hidden="true">🔌</div><h3>Elektronik</h3><p>Kablolama, besleme, sensör yerleşimi, multimetreyle kontrol.</p><div class="day">Yarışmada: kabloları etiketler, ortak GND'yi kontrol eder.</div></article>
+      <article class="role"><div class="ico" aria-hidden="true">💻</div><h3>Yazılım</h3><p>Başlangıç taslağını temaya uyarlar, sensör eşiklerini ayarlar.</p><div class="day">Yarışmada: her çalışan sürümü ayrı adla kaydeder.</div></article>
+      <article class="role"><div class="ico" aria-hidden="true">🏁</div><h3>Test ve pilot</h3><p>Pistte dener, her denemeyi not eder: ne oldu, ne değişti?</p><div class="day">Yarışmada: test defteri ve robotu pist alanına taşıma.</div></article>
+      <article class="role"><div class="ico" aria-hidden="true">🎤</div><h3>Tasarım ve sunum</h3><p>Robotun görünüşü, eskizler, jüriye 2 dakikalık anlatım.</p><div class="day">Yarışmada: süreç fotoğrafları ve son sunum.</div></article>
+    </div>
+  </div>
+</section>
+
+<!-- DRILL -->
+<section id="prova" class="drill">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Tema provası</h2>
+      <p>Zarfı açın, görev kartını okuyun, süreyi başlatın. Sayaç 24 saatlik planı seçtiğiniz süreye sıkıştırır ve hangi aşamada olmanız gerektiğini söyler.</p>
+    </div>
+    <div class="drill-grid">
+      <div class="envelope" id="envelope">
+        <div class="seal">
+          <div>
+            <div class="wax" aria-hidden="true">TYY</div>
+            <p style="margin:0 0 16px;color:var(--ink-2)">Görev kartı mühürlü. Ekip hazırsa açın.</p>
+            <button class="btn primary" type="button" id="openEnv">Zarfı aç</button>
+          </div>
+        </div>
+        <div class="card-out" aria-live="polite">
+          <div class="kind" id="cardNo">Prova kartı</div>
+          <h3 id="cardTheme"></h3>
+          <ul class="rules-mini">
+            <li><b>Görev</b><span id="cardTask"></span></li>
+            <li><b>Mekanizma</b><span id="cardMech"></span></li>
+            <li><b>Kısıt</b><span id="cardLimit"></span></li>
+          </ul>
+          <div class="env-actions">
+            <button class="btn" type="button" id="newCard">Başka kart çek</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="timer">
+        <div class="dur" role="group" aria-label="Prova süresi">
+          <button type="button" data-min="60" aria-pressed="false">60 dk</button>
+          <button type="button" data-min="120" aria-pressed="true">120 dk</button>
+          <button type="button" data-min="180" aria-pressed="false">180 dk</button>
+        </div>
+        <div class="clock" id="clock" role="timer" aria-live="off">2:00:00</div>
+        <div class="phase" id="phase">Süreyi seçip başlatın.</div>
+        <div class="phases" id="phaseBar" aria-hidden="true"></div>
+        <div class="timer-actions">
+          <button class="btn primary" type="button" id="startBtn">Başlat</button>
+          <button class="btn" type="button" id="resetBtn">Sıfırla</button>
+        </div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:28px"><b>Bu kartları biz yazdık.</b>Gerçek temayla ilgileri yok; amaç bilmediğimiz bir göreve hızla karar vermeyi alıştırmak. Gerçek tema yarışmanın ilk günü açıklanacak.</div>
+  </div>
+</section>
+
+<!-- CODE -->
+<section id="kod">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Hazır kod modülleri</h2>
+      <p>Önce dört testi ayrı ayrı çalıştırın. Sonra başlangıç taslağını açın: aynı parçalar tek dosyada, görev adımları durum makinesi olarak hazır. Yarışmada yalnızca görev adımlarını temaya göre değiştirirsiniz.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Kod modülleri">
+      <button role="tab" id="t-sk" aria-controls="p-sk" aria-selected="true">Başlangıç taslağı</button>
+      <button role="tab" id="t-mo" aria-controls="p-mo" aria-selected="false" tabindex="-1">Motor</button>
+      <button role="tab" id="t-li" aria-controls="p-li" aria-selected="false" tabindex="-1">Çizgi</button>
+      <button role="tab" id="t-so" aria-controls="p-so" aria-selected="false" tabindex="-1">Mesafe</button>
+      <button role="tab" id="t-se" aria-controls="p-se" aria-selected="false" tabindex="-1">Servo</button>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-sk" aria-labelledby="t-sk">
+      <div class="panel-head"><p><b>Başlangıç taslağı.</b> Motor + 4'lü çizgi + HC-SR04 + servo, görev adımlarıyla.</p><button class="btn small" data-copy="c-sk">Kodu kopyala</button></div>
+<pre><code id="c-sk">// TYY BASLANGIC TASLAGI - Odemis BILSEM
+// Pinler ORNEKTIR. Kendi baglantiniza gore degistirin.
+#include &lt;Servo.h&gt;
+
+// ---- PINLER ----
+const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;   // L298N sol motor
+const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;  // L298N sag motor
+const byte TRIG = 11, ECHO = 12;                    // HC-SR04
+const byte SERVO_PIN = 3;                           // Servo sinyal
+const byte CIZGI[4] = {A0, A1, A2, A3};             // 4'lu sensor, soldan saga
+
+// ---- AYARLAR (testte bulun) ----
+const bool SIYAH_LOW = true;   // Siyahta sensor LOW veriyorsa true
+const int  HIZ = 90;           // Temel hiz (0-255)
+const int  YAKIN_CM = 10;      // Nesneye bu kadar yaklasinca dur
+const int  SERVO_ACIK = 110, SERVO_KAPALI = 55;
+
+Servo kol;
+
+// ---- GOREV ADIMLARI: temaya gore burayi degistirin ----
+enum Adim { BASLA, CIZGI_TAKIP, YAKLAS, AL, DONUS, BIRAK, BITTI };
+Adim adim = BASLA;
+unsigned long adimBaslangic = 0;
+
+void adimaGec(Adim yeni) {
+  adim = yeni;
+  adimBaslangic = millis();
+  Serial.print("Adim: ");
+  Serial.println(yeni);
+}
+unsigned long adimSuresi() { return millis() - adimBaslangic; }
+
+// ---- MOTOR ----
+void motor(byte pwm, byte in1, byte in2, int hiz) {
+  hiz = constrain(hiz, -255, 255);
+  digitalWrite(in1, hiz &gt;= 0 ? HIGH : LOW);
+  digitalWrite(in2, hiz &gt;= 0 ? LOW : HIGH);
+  analogWrite(pwm, abs(hiz));
+}
+void sur(int sol, int sag) {
+  motor(SOL_PWM, SOL_IN1, SOL_IN2, sol);
+  motor(SAG_PWM, SAG_IN1, SAG_IN2, sag);
+}
+void dur() { sur(0, 0); }
+
+// ---- MESAFE ----
+long mesafeCm() {
+  digitalWrite(TRIG, LOW);  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH); delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long sure = pulseIn(ECHO, HIGH, 25000);
+  return sure == 0 ? 0 : sure / 58;   // 0 = olcum yok
+}
+
+// ---- CIZGI ----
+bool s[4];
+int sonHata = 0;
+bool cizgiVar(byte pin) {
+  int d = digitalRead(pin);
+  return SIYAH_LOW ? d == LOW : d == HIGH;
+}
+int sensorSay() {   // Kac goz cizgiyi goruyor? (0-4)
+  int n = 0;
+  for (byte i = 0; i &lt; 4; i++) { s[i] = cizgiVar(CIZGI[i]); if (s[i]) n++; }
+  return n;
+}
+void cizgiTakip(int hiz) {   // P kontrol, agirliklar -3 -1 +1 +3
+  const int AGIRLIK[4] = {-3, -1, 1, 3};
+  long toplam = 0; int n = 0;
+  for (byte i = 0; i &lt; 4; i++) if (s[i]) { toplam += AGIRLIK[i]; n++; }
+  int hata = (n &gt; 0) ? toplam / n : sonHata;
+  sonHata = hata;
+  int duzeltme = hata * 25;
+  sur(hiz + duzeltme, hiz - duzeltme);
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
+  pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
+  pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
+  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  kol.attach(SERVO_PIN);
+  kol.write(SERVO_ACIK);
+  dur();
+  adimaGec(BASLA);
+}
+
+void loop() {
+  int gorenSensor = sensorSay();
+
+  switch (adim) {
+    case BASLA:                       // 2 sn bekle, sonra yola cik
+      if (adimSuresi() &gt; 2000) adimaGec(CIZGI_TAKIP);
+      break;
+
+    case CIZGI_TAKIP: {               // Cizgiyi izle, onde nesne varsa yaklas
+      cizgiTakip(HIZ);
+      long cm = mesafeCm();
+      if (cm &gt; 0 &amp;&amp; cm &lt; 25) adimaGec(YAKLAS);
+      break;
+    }
+
+    case YAKLAS: {                    // Yavasca nesneye yaklas
+      long cm = mesafeCm();
+      if (cm == 0) dur();             // Olcum yoksa ilerleme
+      else if (cm &gt; YAKIN_CM) sur(60, 60);
+      else { dur(); adimaGec(AL); }
+      break;
+    }
+
+    case AL:                          // Kolu kapat, biraz geri cekil
+      kol.write(SERVO_KAPALI);
+      if (adimSuresi() &gt; 600) sur(-60, -60);
+      if (adimSuresi() &gt; 1000) { dur(); adimaGec(DONUS); }
+      break;
+
+    case DONUS:                       // Yerinde don (sureyi olcun)
+      sur(80, -80);
+      if (adimSuresi() &gt; 700) { dur(); adimaGec(BIRAK); }
+      break;
+
+    case BIRAK:                       // Hedef: 4 sensor de siyah (genis bant)
+      if (gorenSensor == 4) {
+        dur();
+        kol.write(SERVO_ACIK);
+        adimaGec(BITTI);
+      } else {
+        cizgiTakip(70);
+      }
+      break;
+
+    case BITTI:
+      dur();
+      break;
+  }
+  delay(10);
+}</code></pre>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-mo" aria-labelledby="t-mo" hidden>
+      <div class="panel-head"><p><b>Motor testi.</b> Tekerlekler havadayken çalıştırın: ileri, dur, geri.</p><button class="btn small" data-copy="c-mo">Kodu kopyala</button></div>
+<pre><code id="c-mo">// L298N icin ornek Uno pinleri
+const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
+const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
+
+void motor(byte pwm, byte in1, byte in2, int hiz) {
+  hiz = constrain(hiz, -255, 255);
+  digitalWrite(in1, hiz &gt;= 0 ? HIGH : LOW);
+  digitalWrite(in2, hiz &gt;= 0 ? LOW : HIGH);
+  analogWrite(pwm, abs(hiz));
+}
+void sur(int sol, int sag) {
+  motor(SOL_PWM, SOL_IN1, SOL_IN2, sol);
+  motor(SAG_PWM, SAG_IN1, SAG_IN2, sag);
+}
+
+void setup() {
+  pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
+  pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
+}
+
+void loop() {
+  sur(90, 90);   delay(1000);  // Ileri. Bir teker geri donuyorsa kablolarini degistir.
+  sur(0, 0);     delay(700);   // Dur
+  sur(-80, -80); delay(700);   // Geri
+  sur(0, 0);     delay(1500);
+}</code></pre>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-li" aria-labelledby="t-li" hidden>
+      <div class="panel-head"><p><b>Çizgi sensörü testi.</b> Seri Monitör'de dört gözün değerini görün; siyahta 0 mı 1 mi?</p><button class="btn small" data-copy="c-li">Kodu kopyala</button></div>
+<pre><code id="c-li">// 4'lu sensorun OUT1-OUT4 pinleri soldan saga A0-A3'e
+const byte CIZGI[4] = {A0, A1, A2, A3};
+
+void setup() {
+  Serial.begin(9600);
+  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+}
+
+void loop() {
+  for (byte i = 0; i &lt; 4; i++) {
+    Serial.print(digitalRead(CIZGI[i]));
+    Serial.print(' ');
+  }
+  Serial.println();
+  delay(100);
+}
+// Siyah cizgide 0 goruyorsan taslakta SIYAH_LOW = true kalsin.
+// Kartin uzerindeki vidalarla (trimpot) hassasiyeti ayarla.</code></pre>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-so" aria-labelledby="t-so" hidden>
+      <div class="panel-head"><p><b>Mesafe testi.</b> HC-SR04 ile santimetre ölçün. 0 gelirse ölçüm yok demektir.</p><button class="btn small" data-copy="c-so">Kodu kopyala</button></div>
+<pre><code id="c-so">const byte TRIG = 11, ECHO = 12;
+
+long mesafeCm() {
+  digitalWrite(TRIG, LOW);  delayMicroseconds(2);
+  digitalWrite(TRIG, HIGH); delayMicroseconds(10);
+  digitalWrite(TRIG, LOW);
+  unsigned long sure = pulseIn(ECHO, HIGH, 25000); // En fazla 25 ms bekle
+  return sure == 0 ? 0 : sure / 58;
+}
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(TRIG, OUTPUT);
+  pinMode(ECHO, INPUT);
+}
+
+void loop() {
+  long cm = mesafeCm();
+  if (cm == 0) Serial.println("Olcum yok");
+  else { Serial.print(cm); Serial.println(" cm"); }
+  delay(150);
+}</code></pre>
+    </div>
+
+    <div class="panel" role="tabpanel" id="p-se" aria-labelledby="t-se" hidden>
+      <div class="panel-head"><p><b>Servo testi.</b> Kolun güvenli açık ve kapalı açısını bulun.</p><button class="btn small" data-copy="c-se">Kodu kopyala</button></div>
+<pre><code id="c-se">#include &lt;Servo.h&gt;
+Servo kol;
+const byte SERVO_PIN = 3;
+
+void setup() {
+  kol.attach(SERVO_PIN);
+}
+
+void loop() {
+  kol.write(55);  delay(800);   // Kapali denemesi
+  kol.write(90);  delay(800);   // Orta
+  kol.write(110); delay(800);   // Acik denemesi
+}
+// Servo zorlaniyor/vizildiyorsa aciyi daralt.
+// Bulduğun degerleri taslaktaki SERVO_ACIK ve SERVO_KAPALI'ya yaz.</code></pre>
+    </div>
+
+    <div class="code-notes">
+      <div><b>Pinler örnektir.</b> Yarışmada verilecek elektronik parçaların modeli kurallarda yazmıyor. Farklı bir sürücü ya da sensör çıkarsa yalnız ilgili modülü değiştirin.</div>
+      <div><b>Motoru Arduino'nun 5V pininden beslemeyin.</b> Motorlar sürücüden ve pilden beslenir; tüm GND'ler ortak olmalı.</div>
+      <div><b>Her çalışan sürümü kaydedin.</b> Örnek: <code>tyy_v3_kiskac_calisiyor.ino</code>. Bir şey bozulursa bir önceki sürüme dönersiniz.</div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY -->
+<section id="gun">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Yarışma günü: 24 saat planı</h2>
+      <p>Saatler yarışmanın başlangıcından itibaren sayılır. Tema provasındaki sayaç bu planın kısaltılmış hâlidir.</p>
+    </div>
+    <div class="day-grid">
+      <ol class="timeline">
+        <li class="key"><span class="t">0 – 1. saat · Anla</span><p>Temayı ve kuralları dinleyin, örnek parkuru izleyin. Sorularınızı o an sorun. Gelen malzemeyi sayıp listeleyin.</p></li>
+        <li><span class="t">1 – 2. saat · Planla</span><p>Herkes bir fikir söylesin, üç seçenekten birini seçin. Robotu kâğıda çizin: gövde, sensörlerin yeri, mekanizma.</p></li>
+        <li class="key"><span class="t">2 – 8. saat · Yap</span><p>Mekanik gövdeyi, elektronik kabloları, yazılım taslağı temaya uyarlamayı aynı anda yapar. 8. saatte robot yürümeli.</p></li>
+        <li><span class="t">8 – 10. saat · İlk sürüş</span><p>Motor yönleri, sensör eşikleri, servo açıları. Her denemeyi test defterine yazın.</p></li>
+        <li><span class="t">10 – 14. saat · Dinlenme vardiyası</span><p>İkişer kişi dönüşümlü dinlenir. Yorgun ekip hata yapar; vardiyayı planlayın.</p></li>
+        <li class="key"><span class="t">14 – 20. saat · Görevi çöz</span><p>Görevi baştan sona deneyin, en çok kaybettiren tek sorunu düzeltin, tekrar deneyin.</p></li>
+        <li><span class="t">20 – 22. saat · Dondur</span><p>Yeni özellik yok. Çalışan kodu kaydedin, kabloları bağlarla toplayın, yedek alın.</p></li>
+        <li class="key"><span class="t">22 – 24. saat · Sun ve taşı</span><p>Sunum provası yapın. Robotu pist alanına taşıyın: bitmeyen robot değerlendirilmez ama pist alanına taşınmak zorunda.</p></li>
+      </ol>
+      <aside class="jury">
+        <h3>Jüri neye bakar?</h3>
+        <p class="muted" style="margin:0">Kurala göre robotlar mekanik, yazılımsal ve endüstriyel tasarım açısından değerlendirilir. Her biri için gösterebileceklerimiz:</p>
+        <dl>
+          <dt>Mekanik</dt><dd>Sağlam, dengeli gövde; amaca uygun mekanizma; K'Nex'in akıllıca kullanımı.</dd>
+          <dt>Yazılım</dt><dd>Adım adım okunur kod, sensörle karar veren robot, ayarlanabilir eşikler.</dd>
+          <dt>Endüstriyel tasarım</dt><dd>Temaya uygun görünüş, düzenli kablolar, ilk eskizden son hâle süreç fotoğrafları.</dd>
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- BAG -->
+<section id="canta">
+  <div class="wrap">
+    <div class="sh">
+      <h2>Çanta ve kurallar</h2>
+      <p>Listede olmayan malzeme götürmek yasak; kontrol edilip ayrı kutuya kaldırılır. Robot parçalarını organizasyon verir.</p>
+    </div>
+    <div class="bag-grid">
+      <div class="box">
+        <h3>Araç ve malzeme</h3>
+        <p class="muted" style="margin:0">Kategori kuralları, madde 3</p>
+        <div id="bag">
+          <label class="check"><input type="checkbox" data-k="b1"><span>Dizüstü bilgisayar (ekip başına)</span></label>
+          <label class="check"><input type="checkbox" data-k="b2"><span>Multimetre</span></label>
+          <label class="check"><input type="checkbox" data-k="b3"><span>Yan keski, uç keski, pense</span></label>
+          <label class="check"><input type="checkbox" data-k="b4"><span>Kablo bağları (plastik kelepçe)</span></label>
+          <label class="check"><input type="checkbox" data-k="b5"><span>Cetvel</span></label>
+          <label class="check"><input type="checkbox" data-k="b6"><span>Phillips ve düz tornavida</span></label>
+          <label class="check"><input type="checkbox" data-k="b7"><span>3 mm ve 4 mm inbus anahtar</span></label>
+          <label class="check"><input type="checkbox" data-k="b8"><span>Li-Po pil şarj cihazı</span></label>
+          <label class="check"><input type="checkbox" data-k="b9"><span>Jumper kablo, bakır tel</span></label>
+          <label class="check"><input type="checkbox" data-k="b10"><span>Isıyla daralan makaron</span></label>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Belgeler</h3>
+        <p class="muted" style="margin:0">Genel kurallar, madde 1 ve 11</p>
+        <label class="check"><input type="checkbox" data-k="d1"><span>Resmî veli izin belgesi: çıktı alınmış, veli tarafından doldurulup imzalanmış. El yazısıyla hazırlanan belge kabul edilmez.</span></label>
+        <label class="check"><input type="checkbox" data-k="d2"><span>Her öğrencinin T.C. kimlik kartı (pist alanında hakeme gösterilir)</span></label>
+        <label class="check"><input type="checkbox" data-k="d3"><span>Kodların ve bu sayfanın çevrimdışı kopyası dizüstünde</span></label>
+      </div>
+      <div class="box no">
+        <h3>Diskalifiye eder</h3>
+        <ul>
+          <li>K'Nex'e yapıştırıcı, bant, silikon ya da makaron; parçalara kalıcı zarar.</li>
+          <li>24 saat boyunca yarışma alanına yarışmacı ve görevliler dışında birinin girmesi.</li>
+          <li>Koçun robota ya da öğrenciye müdahale etmesi, yönlendirmesi.</li>
+          <li>Başka robotlara ya da pistlere zarar vermek, izinsiz parkura girmek.</li>
+          <li>Centilmenliğe aykırı davranış. İtirazlar yalnız yazılı olarak kriz masasına yapılır.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note ask">
+      <b>Koç toplantısında ya da organizasyona soracaklarımız</b>
+      Elektronik kitte hangi kart, motor, sürücü ve sensörler var? Arduino USB kablosu kitte mi, yoksa biz mi getiriyoruz? Önceden yazılmış kodu dizüstünde getirmek serbest mi? Yarışma kaçta başlıyor? Tarih yeni sitede 19–20 Aralık, eski sitede 18–20 Aralık yazıyor; resmî duyuruyla doğrulayın.
+    </div>
+  </div>
+</section>
+
+<div class="sources">
+  <div class="wrap">
+    <b>Kaynaklar</b>
+    <ul>
+      <li><a href="https://www.iztechroboleague.com/" target="_blank" rel="noreferrer">IZTECH RoboLeague resmî sitesi</a></li>
+      <li><a href="https://www.iztechroboleague.com/kayit-ol" target="_blank" rel="noreferrer">Kayıt sayfası</a></li>
+      <li>Tasarla-Yap-Yarıştır kategori kuralları (PDF, 2 sayfa)</li>
+      <li>IZTECH RoboLeague Genel Kuralları 2026 (PDF, 4 sayfa)</li>
+      <li><a href="https://irl.iyte.edu.tr/arsiv/" target="_blank" rel="noreferrer">Eski site: geçmiş yıllar arşivi</a></li>
+      <li><a href="https://tkat35.github.io/mebrobot2026/" target="_blank" rel="noreferrer">MEB Robot 2026 hazırlık portalımız</a></li>
+      <li><a href="https://docs.arduino.cc/language-reference/en/functions/advanced-io/pulseIn/" target="_blank" rel="noreferrer">Arduino pulseIn()</a></li>
+      <li><a href="https://docs.arduino.cc/libraries/servo/" target="_blank" rel="noreferrer">Arduino Servo kütüphanesi</a></li>
+    </ul>
+  </div>
+</div>
+</main>
+
+<footer><div class="wrap"><span>Turan Katırcıoğlu · Ödemiş Bilim ve Sanat Merkezi · 2026</span><span>Kurallar değişebilir; güncel PDF'leri takip edin.</span></div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('tyy.' + k); return v === null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('tyy.' + k, JSON.stringify(v)); } catch {} }
+  };
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const toast = (msg) => { const t = $('#toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 1800); };
+
+  // Team name
+  const team = $('#teamName');
+  team.value = store.get('team', '');
+  team.addEventListener('input', () => store.set('team', team.value));
+
+  // Countdowns (Türkiye saati, UTC+3)
+  const daysTo = (iso) => Math.max(0, Math.ceil((new Date(iso) - Date.now()) / 86400000));
+  $('#dReg').textContent = daysTo('2026-12-13T23:59:00+03:00');
+  $('#dEvent').textContent = daysTo('2026-12-19T00:00:00+03:00');
+
+  // Current week highlight
+  const today = new Date();
+  $$('.week').forEach(w => {
+    const s = new Date(w.dataset.start + 'T00:00:00+03:00'), e = new Date(w.dataset.end + 'T23:59:59+03:00');
+    if (today >= s && today <= e) w.classList.add('now');
+  });
+
+  // Checkboxes with memory
+  const checks = $$('input[type=checkbox][data-k]');
+  const updatePlan = () => {
+    const plan = $$('#weeks input[type=checkbox]');
+    const done = plan.filter(c => c.checked).length;
+    $('#planPct').textContent = done + ' / ' + plan.length + ' iş tamam';
+    $('#planBar').style.width = (plan.length ? done / plan.length * 100 : 0) + '%';
+  };
+  checks.forEach(c => {
+    c.checked = store.get('c.' + c.dataset.k, false);
+    c.addEventListener('change', () => { store.set('c.' + c.dataset.k, c.checked); updatePlan(); });
+  });
+  updatePlan();
+
+  // Letter builder
+  const areas = $$('textarea[data-letter]');
+  const render = () => {
+    const parts = areas.map(a => a.value.trim()).filter(Boolean);
+    const body = $('#paperBody');
+    body.innerHTML = '';
+    if (!parts.length) { body.innerHTML = '<p class="empty">Soruları cevapladıkça mektup burada oluşur.</p>'; return; }
+    parts.forEach(t => { const p = document.createElement('p'); p.textContent = t; body.appendChild(p); });
+  };
+  areas.forEach(a => {
+    a.value = store.get('l.' + a.dataset.letter, '');
+    a.addEventListener('input', () => { store.set('l.' + a.dataset.letter, a.value); render(); });
+  });
+  render();
+
+  async function copyText(text) {
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch {
+      const f = document.createElement('textarea'); f.value = text; f.style.position = 'fixed'; f.style.opacity = '0';
+      document.body.appendChild(f); f.select(); const ok = document.execCommand('copy'); f.remove(); return ok;
+    }
+  }
+  $('#copyLetter').addEventListener('click', async () => {
+    const text = areas.map(a => a.value.trim()).filter(Boolean).join('\n\n');
+    if (!text) { toast('Önce soruları cevaplayın'); return; }
+    toast(await copyText(text) ? 'Taslak kopyalandı' : 'Kopyalanamadı, metni seçip kopyalayın');
+  });
+
+  // Code tabs
+  const tabs = $$('[role=tab]');
+  const select = (tab) => {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      $('#' + t.getAttribute('aria-controls')).hidden = !on;
+    });
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', e => {
+      const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!d) return;
+      const n = tabs[(i + d + tabs.length) % tabs.length]; select(n); n.focus();
+    });
+  });
+  $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const ok = await copyText($('#' + b.dataset.copy).innerText);
+    toast(ok ? 'Kod kopyalandı' : 'Kopyalanamadı, kodu seçip kopyalayın');
+  }));
+
+  // Theme cards (practice only)
+  const THEMES = [
+    ['Deprem sonrası arama', 'Enkaz alanında ilerleyip "canlı" işaretli kutunun önünde dur ve bayrağı kaldır.'],
+    ['Fidan dikimi', 'Çizgi boyunca ilerle, üç işaretli noktada durup birer "tohum" bırak.'],
+    ['Kütüphane görevlisi', 'Masadaki kitabı (küçük kutu) al, raf alanına götürüp bırak.'],
+    ['Orman yangını', 'Yangın noktasını (engel) bul, yaklaş ve söndürme kolunu indir.'],
+    ['Kargo ayırma', 'Uzun ve kısa iki kutudan uzun olanı sağ bölgeye, kısa olanı sol bölgeye it.'],
+    ['Otopark görevlisi', 'Duvarlara çarpmadan park alanına gir ve bandın içinde dur.'],
+    ['Temiz sahil', 'Alandaki üç topu (ya da kapağı) kenardaki toplama bölgesine it.'],
+    ['İlk yardım taşıyıcısı', 'Rampayı çık, yükü düşürmeden in ve hedef çizgide dur.'],
+    ['Maden kaşifi', 'Kapalı bir alanı tara, içindeki nesneyi bulup dışarı çıkar.'],
+    ['Akıllı tarla', 'Tarlanın sıralarını (paralel çizgiler) sırayla gez, sonunda başlangıca dön.']
+  ];
+  const MECH = ['Kıskaç', 'Kepçe', 'İtici kol', 'Kaldıraç ile kalkan kol', 'Önde sabit tampon/sürgü', 'Döner tabla'];
+  const LIMIT = [
+    'Robot 25 × 25 cm alana sığmalı.',
+    'Yalnız bir servo kullanılabilir.',
+    'Çizgi sensörü kullanmak yok; yalnız mesafe sensörü.',
+    'Görev 90 saniyede bitmeli.',
+    'Pistteki ışık değişebilir: sensör eşiğini sahada ayarlayın.',
+    'Jüriye robotu 1 dakikada anlatacak sunum da hazır olmalı.',
+    'Tekerlek yerine palet ya da farklı bir yürüyüş deneyin.'
+  ];
+  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+  let lastTheme = -1, cardCount = 0;
+  const drawCard = () => {
+    let i; do { i = Math.floor(Math.random() * THEMES.length); } while (i === lastTheme && THEMES.length > 1);
+    lastTheme = i; cardCount++;
+    $('#cardNo').textContent = 'Prova kartı ' + cardCount;
+    $('#cardTheme').textContent = THEMES[i][0];
+    $('#cardTask').textContent = THEMES[i][1];
+    $('#cardMech').textContent = pick(MECH);
+    $('#cardLimit').textContent = pick(LIMIT);
+  };
+  $('#openEnv').addEventListener('click', () => { drawCard(); $('#envelope').classList.add('open'); $('#cardTheme').focus?.(); });
+  $('#newCard').addEventListener('click', drawCard);
+
+  // Timer: 24h plan compressed
+  const PHASES = [
+    ['Anla', 1, 'Temayı okuyun, malzemeyi sayın, soruları yazın.'],
+    ['Planla', 1, 'Üç fikir, bir seçim. Robotu kâğıda çizin.'],
+    ['Yap', 6, 'Mekanik, elektronik ve yazılım aynı anda çalışır.'],
+    ['İlk sürüş', 2, 'Motor yönleri, sensör eşikleri, servo açıları.'],
+    ['Görevi çöz', 6, 'Dene, en büyük sorunu düzelt, tekrar dene.'],
+    ['Dondur', 2, 'Yeni özellik yok. Kaydet, kabloları topla.'],
+    ['Sun', 2, 'Jüriye 1–2 dakikalık anlatımı prova edin.']
+  ];
+  // Dinlenme vardiyası provada yok; kalan aşamalar oranlanır.
+  const TOTAL_UNITS = PHASES.reduce((s, p) => s + p[1], 0);
+  let minutes = 120, remaining = minutes * 60000, running = false, endAt = 0, tick = null;
+  const clock = $('#clock'), phaseEl = $('#phase'), bar = $('#phaseBar'), startBtn = $('#startBtn');
+
+  bar.innerHTML = PHASES.map(p => `<i style="width:${p[1] / TOTAL_UNITS * 100}%" title="${p[0]}"></i>`).join('');
+
+  const fmt = (ms) => {
+    const s = Math.ceil(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), ss = s % 60;
+    return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(ss).padStart(2, '0');
+  };
+  const draw = () => {
+    clock.textContent = fmt(remaining);
+    const total = minutes * 60000, elapsed = total - remaining;
+    let acc = 0, cur = PHASES.length - 1;
+    for (let i = 0; i < PHASES.length; i++) { acc += PHASES[i][1] / TOTAL_UNITS * total; if (elapsed < acc) { cur = i; break; } }
+    $$('i', bar).forEach((el, i) => { el.className = i < cur ? 'done' : i === cur && (running || elapsed > 0) ? 'cur' : ''; });
+    if (remaining <= 0) phaseEl.textContent = 'Süre bitti. Robotu pist alanına taşıyın!';
+    else if (!running && elapsed === 0) phaseEl.textContent = 'Süreyi seçip başlatın.';
+    else {
+      const phaseEnd = PHASES.slice(0, cur + 1).reduce((s, p) => s + p[1], 0) / TOTAL_UNITS * total;
+      phaseEl.textContent = `${PHASES[cur][0]}: ${PHASES[cur][2]} (bu aşamaya ${fmt(Math.max(0, phaseEnd - elapsed))} kaldı)`;
+    }
+  };
+  const stop = () => { running = false; clearInterval(tick); startBtn.textContent = remaining > 0 && remaining < minutes * 60000 ? 'Devam et' : 'Başlat'; };
+  startBtn.addEventListener('click', () => {
+    if (running) { remaining = endAt - Date.now(); stop(); draw(); return; }
+    if (remaining <= 0) remaining = minutes * 60000;
+    running = true; endAt = Date.now() + remaining; startBtn.textContent = 'Duraklat';
+    tick = setInterval(() => { remaining = Math.max(0, endAt - Date.now()); draw(); if (!remaining) stop(); }, 250);
+    draw();
+  });
+  $('#resetBtn').addEventListener('click', () => { stop(); remaining = minutes * 60000; startBtn.textContent = 'Başlat'; draw(); });
+  $$('.dur button').forEach(b => b.addEventListener('click', () => {
+    if (running) { toast('Önce sayacı duraklatın'); return; }
+    $$('.dur button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    minutes = +b.dataset.min; remaining = minutes * 60000; startBtn.textContent = 'Başlat'; draw();
+  }));
+  draw();
+})();
+</script>
+</body>
+</html>

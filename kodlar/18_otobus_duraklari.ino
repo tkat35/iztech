@@ -6,17 +6,17 @@
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int HIZ = 85, KP = 25;
 const byte DURAK_SAYISI = 3;
 const int BEKLEME_MS = 2000;
 const int KAPI_KAPALI = 90, KAPI_ACIK = 150;
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
-bool s[4];
+const int AGIRLIK[3] = {-2, 0, 2};
+bool s[3];
 int sonHata = 0;
 byte durakNo = 0;
 byte bantSayaci = 0;
@@ -41,10 +41,10 @@ bool cizgiVar(byte pin) {
 
 void pTakip(int temel) {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i < 4; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
+  for (byte i = 0; i < 3; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
   int hata;
   if (goren > 0) { hata = toplam / goren; sonHata = hata; }
-  else hata = sonHata < 0 ? -4 : (sonHata > 0 ? 4 : 0);
+  else hata = sonHata < 0 ? -3 : (sonHata > 0 ? 3 : 0);
   int d = KP * hata;
   sur(temel + d, temel - d);
 }
@@ -62,7 +62,7 @@ void durakta() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   kapi.attach(SERVO_PIN);
   kapi.write(KAPI_KAPALI);
   sur(0, 0);
@@ -72,8 +72,8 @@ void setup() {
 void loop() {
   if (durakNo >= DURAK_SAYISI) { sur(0, 0); return; }   // Hat bitti
 
-  for (byte i = 0; i < 4; i++) s[i] = cizgiVar(CIZGI[i]);
-  bool bant = s[0] && s[1] && s[2] && s[3];
+  for (byte i = 0; i < 3; i++) s[i] = cizgiVar(CIZGI[i]);
+  bool bant = s[0] && s[1] && s[2];
   bantSayaci = bant ? bantSayaci + 1 : 0;
 
   if (bantSayaci >= 3) { bantSayaci = 0; durakta(); return; }

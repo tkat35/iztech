@@ -22,8 +22,8 @@
     {
       "type": "wokwi-servo",
       "id": "servo",
-      "top": 20,
-      "left": 330,
+      "top": 150,
+      "left": 340,
       "attrs": {}
     },
     {
@@ -60,7 +60,7 @@
       "type": "wokwi-led",
       "id": "sagGeri",
       "top": -190,
-      "left": 170,
+      "left": 140,
       "attrs": {
         "color": "red",
         "label": "Sağ geri"
@@ -70,7 +70,7 @@
       "type": "wokwi-led",
       "id": "sagIleri",
       "top": -190,
-      "left": 215,
+      "left": 185,
       "attrs": {
         "color": "green",
         "label": "Sağ ileri"
@@ -80,7 +80,7 @@
       "type": "wokwi-led",
       "id": "sagHiz",
       "top": -190,
-      "left": 260,
+      "left": 230,
       "attrs": {
         "color": "yellow",
         "label": "Sağ hız"
@@ -89,29 +89,22 @@
     {
       "type": "wokwi-slide-switch",
       "id": "s1",
-      "top": 250,
-      "left": 150,
+      "top": -110,
+      "left": 320,
       "attrs": {}
     },
     {
       "type": "wokwi-slide-switch",
       "id": "s2",
-      "top": 250,
-      "left": 195,
+      "top": -110,
+      "left": 365,
       "attrs": {}
     },
     {
       "type": "wokwi-slide-switch",
       "id": "s3",
-      "top": 250,
-      "left": 240,
-      "attrs": {}
-    },
-    {
-      "type": "wokwi-slide-switch",
-      "id": "s4",
-      "top": 250,
-      "left": 285,
+      "top": -110,
+      "left": 410,
       "attrs": {}
     }
   ],
@@ -152,11 +145,12 @@
     ],
     [
       "servo:PWM",
-      "uno:3",
+      "uno:13",
       "orange",
       [
         "h-20",
-        "v-110"
+        "v-235",
+        "h-195"
       ]
     ],
     [
@@ -164,8 +158,9 @@
       "uno:5V",
       "red",
       [
-        "h-10",
-        "v110"
+        "h-12",
+        "v20",
+        "h-170"
       ]
     ],
     [
@@ -173,8 +168,9 @@
       "uno:GND.3",
       "black",
       [
-        "h-15",
-        "v120"
+        "h-6",
+        "v30",
+        "h-155"
       ]
     ],
     [
@@ -273,25 +269,19 @@
     ],
     [
       "s1:2",
-      "uno:A0",
+      "uno:2",
       "blue",
       []
     ],
     [
       "s2:2",
-      "uno:A1",
+      "uno:3",
       "blue",
       []
     ],
     [
       "s3:2",
-      "uno:A2",
-      "blue",
-      []
-    ],
-    [
-      "s4:2",
-      "uno:A3",
+      "uno:4",
       "blue",
       []
     ],
@@ -300,9 +290,9 @@
       "s2:1",
       "red",
       [
-        "v20",
+        "v-14",
         "*",
-        "v20"
+        "v-14"
       ]
     ],
     [
@@ -310,9 +300,9 @@
       "s2:3",
       "black",
       [
-        "v32",
+        "v-24",
         "*",
-        "v32"
+        "v-24"
       ]
     ],
     [
@@ -320,9 +310,9 @@
       "s3:1",
       "red",
       [
-        "v20",
+        "v-14",
         "*",
-        "v20"
+        "v-14"
       ]
     ],
     [
@@ -330,45 +320,29 @@
       "s3:3",
       "black",
       [
-        "v32",
+        "v-24",
         "*",
-        "v32"
+        "v-24"
       ]
     ],
     [
       "s3:1",
-      "s4:1",
-      "red",
-      [
-        "v20",
-        "*",
-        "v20"
-      ]
-    ],
-    [
-      "s3:3",
-      "s4:3",
-      "black",
-      [
-        "v32",
-        "*",
-        "v32"
-      ]
-    ],
-    [
-      "s1:1",
       "uno:5V",
       "red",
       [
-        "v20"
+        "v-14",
+        "h60",
+        "v300"
       ]
     ],
     [
-      "s1:3",
-      "uno:GND.2",
+      "s3:3",
+      "uno:GND.3",
       "black",
       [
-        "v32"
+        "v-24",
+        "h75",
+        "v320"
       ]
     ]
   ],

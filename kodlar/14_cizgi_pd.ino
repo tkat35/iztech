@@ -4,14 +4,14 @@
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int TEMEL_HIZ = 120;
 const int KP = 22;           // 13. uygulamada buldugunuz degerden biraz kucuk baslayin
 const int KD = 15;           // 0'dan baslayip artirin; zikzak azalinca durun
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
+const int AGIRLIK[3] = {-2, 0, 2};
 int sonHata = 0;             // Kayip durumunda yon icin
 int oncekiHata = 0;          // D icin bir onceki dongudeki hata
 const unsigned long ARAMA_MS = 1500;   // Cizgi bu kadar sure gorulmezse dur
@@ -35,11 +35,11 @@ bool cizgiVar(byte pin) {
 
 int hataOku() {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i < 4; i++) {
+  for (byte i = 0; i < 3; i++) {
     if (cizgiVar(CIZGI[i])) { toplam += AGIRLIK[i]; goren++; }
   }
   if (goren == 0) {
-    return sonHata < 0 ? -4 : (sonHata > 0 ? 4 : 0);
+    return sonHata < 0 ? -3 : (sonHata > 0 ? 3 : 0);
   }
   sonGorulme = millis();
   sonHata = toplam / goren;
@@ -49,7 +49,7 @@ int hataOku() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
   sonGorulme = millis();

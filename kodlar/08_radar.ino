@@ -5,7 +5,7 @@
 #include <Servo.h>
 
 const byte TRIG = 11, ECHO = 12;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 const int ACILAR[5] = {30, 60, 90, 120, 150};   // 30 = sag, 150 = sol (montaja gore degisebilir)
 
 Servo kafa;

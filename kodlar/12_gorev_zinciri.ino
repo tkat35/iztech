@@ -6,9 +6,9 @@
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;        // 2. uygulamadaki deger
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int HIZ = 80, YAVAS = 40, ARA = 70;   // 7. uygulamadaki degerler
 const int ACIK = 110, KAPALI = 55;          // 4. uygulamadaki acilar
@@ -20,7 +20,7 @@ Adim adim = GIT;
 byte bantSayaci = 0;
 int sonYon = 0;
 unsigned long kayipBaslangic = 0;
-bool s[4];
+bool s[3];
 
 Servo kiskac;
 
@@ -41,12 +41,12 @@ bool cizgiVar(byte pin) {
 }
 
 void cizgiIzle() {
-  if (s[0] || s[1] || s[2] || s[3]) kayipBaslangic = 0;
-  if (s[1] && s[2])  { sur(HIZ, HIZ);       sonYon = 0;  }
-  else if (s[0])     { sur(YAVAS / 2, HIZ); sonYon = -1; }
-  else if (s[1])     { sur(YAVAS, HIZ);     sonYon = -1; }
-  else if (s[3])     { sur(HIZ, YAVAS / 2); sonYon = 1;  }
-  else if (s[2])     { sur(HIZ, YAVAS);     sonYon = 1;  }
+  if (s[0] || s[1] || s[2]) kayipBaslangic = 0;
+  if (s[1] && s[0] == s[2]) { sur(HIZ, HIZ);       sonYon = 0;  }  // Ortada: duz
+  else if (s[0] && s[1])    { sur(YAVAS, HIZ);     sonYon = -1; }  // Biraz solda
+  else if (s[0])            { sur(YAVAS / 2, HIZ); sonYon = -1; }  // Cok solda: sert sola
+  else if (s[2] && s[1])    { sur(HIZ, YAVAS);     sonYon = 1;  }  // Biraz sagda
+  else if (s[2])            { sur(HIZ, YAVAS / 2); sonYon = 1;  }  // Cok sagda: sert saga
   else {
     if (kayipBaslangic == 0) kayipBaslangic = millis();
     if (millis() - kayipBaslangic > ARAMA_MS) sur(0, 0);
@@ -59,7 +59,7 @@ void cizgiIzle() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   kiskac.attach(SERVO_PIN);
   kiskac.write(ACIK);               // Yuku koymak icin ac
@@ -69,11 +69,11 @@ void setup() {
 }
 
 void loop() {
-  for (byte i = 0; i < 4; i++) s[i] = cizgiVar(CIZGI[i]);
+  for (byte i = 0; i < 3; i++) s[i] = cizgiVar(CIZGI[i]);
 
   switch (adim) {
     case GIT: {
-      bool bant = s[0] && s[1] && s[2] && s[3];
+      bool bant = s[0] && s[1] && s[2];
       bantSayaci = bant ? bantSayaci + 1 : 0;
       if (bantSayaci >= BANT_OKUMA) { sur(0, 0); adim = BIRAK; }
       else cizgiIzle();

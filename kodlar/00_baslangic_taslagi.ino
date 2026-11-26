@@ -6,8 +6,8 @@
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;   // L298N sol motor
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;  // L298N sag motor
 const byte TRIG = 11, ECHO = 12;                    // HC-SR04
-const byte SERVO_PIN = 3;                           // Servo sinyal
-const byte CIZGI[4] = {A0, A1, A2, A3};             // 4'lu sensor, soldan saga
+const byte SERVO_PIN = 13;                           // Servo sinyal
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 
 // ---- AYARLAR (testte bulun) ----
 const bool SIYAH_LOW = true;   // Siyahta sensor LOW veriyorsa true
@@ -56,21 +56,21 @@ long mesafeCm() {
 }
 
 // ---- CIZGI ----
-bool s[4];
+bool s[3];
 int sonHata = 0;
 bool cizgiVar(byte pin) {
   int d = digitalRead(pin);
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
-int sensorSay() {   // Kac goz cizgiyi goruyor? (0-4)
+int sensorSay() {   // Kac goz cizgiyi goruyor? (0-3)
   int n = 0;
-  for (byte i = 0; i < 4; i++) { s[i] = cizgiVar(CIZGI[i]); if (s[i]) n++; }
+  for (byte i = 0; i < 3; i++) { s[i] = cizgiVar(CIZGI[i]); if (s[i]) n++; }
   return n;
 }
-void cizgiTakip(int hiz) {   // P kontrol, agirliklar -3 -1 +1 +3
-  const int AGIRLIK[4] = {-3, -1, 1, 3};
+void cizgiTakip(int hiz) {   // P kontrol, agirliklar -2 0 +2
+  const int AGIRLIK[3] = {-2, 0, 2};
   long toplam = 0; int n = 0;
-  for (byte i = 0; i < 4; i++) if (s[i]) { toplam += AGIRLIK[i]; n++; }
+  for (byte i = 0; i < 3; i++) if (s[i]) { toplam += AGIRLIK[i]; n++; }
   int hata = (n > 0) ? toplam / n : sonHata;
   sonHata = hata;
   int duzeltme = KP * hata;
@@ -82,7 +82,7 @@ void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   kol.attach(SERVO_PIN);
   kol.write(SERVO_ACIK);
   dur();
@@ -123,8 +123,8 @@ void loop() {
       if (adimSuresi() > (unsigned long)DONUS_MS * 2) { dur(); adimaGec(BIRAK); }
       break;
 
-    case BIRAK:                       // Hedef: 4 sensor de siyah (genis bant)
-      if (gorenSensor == 4) {
+    case BIRAK:                       // Hedef: 3 goz de siyah (genis bant)
+      if (gorenSensor == 3) {
         dur();
         kol.write(SERVO_ACIK);
         adimaGec(BITTI);

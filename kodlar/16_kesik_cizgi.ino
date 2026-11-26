@@ -4,15 +4,15 @@
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int HIZ = 85, KP = 25, ARAMA_HIZI = 65;
 const unsigned long BOSLUK_MS = 500;   // Bu kadar sure duz git (bosluk uzunluguna gore)
 const unsigned long ARAMA_MS = 1200;   // Sonra bu kadar sure don ve ara
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
-bool s[4];
+const int AGIRLIK[3] = {-2, 0, 2};
+bool s[3];
 int sonHata = 0;
 unsigned long kayipBaslangic = 0;      // 0 = cizgi kayip degil
 
@@ -35,14 +35,14 @@ bool cizgiVar(byte pin) {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }
 
 void loop() {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i < 4; i++) {
+  for (byte i = 0; i < 3; i++) {
     s[i] = cizgiVar(CIZGI[i]);
     if (s[i]) { toplam += AGIRLIK[i]; goren++; }
   }

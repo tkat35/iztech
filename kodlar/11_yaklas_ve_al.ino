@@ -7,7 +7,7 @@
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int YAKLASMA_HIZI = 80;
 const int AL_CM = 8;                  // Nesne kiskacin icine girdiginde olculen mesafe

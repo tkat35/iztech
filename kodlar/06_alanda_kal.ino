@@ -4,7 +4,7 @@
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int HIZ = 90;
@@ -31,15 +31,15 @@ bool cizgiVar(byte pin) {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   randomSeed(analogRead(A5));   // "Bir adim ote" icin: random() her acilista farkli olsun
   delay(3000);
 }
 
 void loop() {
-  bool solKenar = cizgiVar(CIZGI[0]) || cizgiVar(CIZGI[1]);
-  bool sagKenar = cizgiVar(CIZGI[2]) || cizgiVar(CIZGI[3]);
+  bool solKenar = cizgiVar(CIZGI[0]);
+  bool sagKenar = cizgiVar(CIZGI[2]) || cizgiVar(CIZGI[1]);
 
   if (!solKenar && !sagKenar) {
     sur(HIZ, HIZ);              // Alan icinde: ileri

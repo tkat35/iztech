@@ -1,10 +1,10 @@
 // 4. SERVO: Seri Monitor'den aci yaz, servo o aciya gitsin
-// Sinyal -> 3. Seri Monitor: 9600 baud, satir sonu "Yeni satir".
+// Sinyal -> 13. Seri Monitor: 9600 baud, satir sonu "Yeni satir".
 
 #include <Servo.h>
 
 Servo kol;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 const int EN_AZ = 10, EN_COK = 170;   // Guvenli sinirlar; mekanizmaya gore daraltin
 
 void setup() {

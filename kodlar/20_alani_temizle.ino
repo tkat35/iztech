@@ -5,7 +5,7 @@
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int ITME_HIZI = 110;
@@ -38,7 +38,7 @@ bool cizgiVar(byte pin) {
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
 bool kenarda() {
-  for (byte i = 0; i < 4; i++) if (cizgiVar(CIZGI[i])) return true;
+  for (byte i = 0; i < 3; i++) if (cizgiVar(CIZGI[i])) return true;
   return false;
 }
 
@@ -46,7 +46,7 @@ void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }

@@ -174,6 +174,10 @@ td[rowspan]{font-weight:700;border-right:1px solid var(--line)}
 .b.va{background:#ff8c1a;color:#3b1d00}
 .b.op{background:#59c059;color:#0d2b0d}
 .b.ex{background:#e8f1ff;color:#123e7a;border:2px dashed #4c97ff}
+.b.mo{background:#c62f36;color:#fff}
+.b.ln{background:#5cd6b0;color:#06372a}
+.b.pn{background:#3f6fd1;color:#fff}
+.b.se{background:#6cbde3;color:#0b2f45}
 .b.in-b{padding:1px 7px;margin:0 2px;font-size:13px;border-radius:12px}
 .b.mini{padding:0 6px;font-size:13px}
 
@@ -188,7 +192,7 @@ td[rowspan]{font-weight:700;border-right:1px solid var(--line)}
 .sim-mode{display:flex;gap:8px;margin:14px 0}
 .sim-mode button{flex:1;min-height:44px;border:2px solid var(--ink);border-radius:8px;background:var(--card);font-weight:700;cursor:pointer}
 .sim-mode button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
-.eyes{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px;border-radius:10px;background:#2f6b5c}
+.eyes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px;border-radius:10px;background:#2f6b5c}
 .eye{min-height:72px;border:2px solid #d9ead7;border-radius:8px;background:#f8f6f0;color:var(--ink);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .eye span{font-size:12px;font-weight:600}
 .eye b{font-size:18px}
@@ -546,13 +550,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
             <tr><td>TRIG</td><td>11</td></tr>
             <tr><td>ECHO</td><td>12</td></tr>
             <tr><td>GND</td><td>GND</td></tr>
-            <tr><td rowspan="6">4'lü çizgi sensörü</td><td>VCC</td><td>5V</td></tr>
-            <tr><td>OUT1 (en sol göz)</td><td>A0</td></tr>
-            <tr><td>OUT2</td><td>A1</td></tr>
-            <tr><td>OUT3</td><td>A2</td></tr>
-            <tr><td>OUT4 (en sağ göz)</td><td>A3</td></tr>
+            <tr><td rowspan="5">Çizgi sensörü (ALPGEN M052, 3 göz)</td><td>VCC</td><td>5V</td></tr>
+            <tr><td>Sol göz</td><td>2</td></tr>
+            <tr><td>Orta göz</td><td>3</td></tr>
+            <tr><td>Sağ göz</td><td>4</td></tr>
             <tr><td>GND</td><td>GND</td></tr>
-            <tr><td rowspan="3">Servo</td><td>Turuncu / sarı kablo (sinyal)</td><td>3</td></tr>
+            <tr><td rowspan="3">Servo</td><td>Turuncu / sarı kablo (sinyal)</td><td>13</td></tr>
             <tr><td>Kırmızı kablo (+)</td><td>5V</td></tr>
             <tr><td>Kahverengi / siyah kablo (−)</td><td>GND</td></tr>
           </tbody>
@@ -572,7 +575,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
         </div>
         <div class="note"><b>Besleme düzeni: iki ayrı pil</b>Arduino kendi pilinden beslenir (yuvarlak DC soketi ya da Vin–GND). Motorlar ayrı bir pilden, sürücü üzerinden beslenir. L298N'in 5V çıkışını Arduino'ya bağlamayın. Sensörler ve tek bir küçük servo Arduino'nun 5V'undan beslenir. Motor pilinin eksi ucu, sürücünün GND'si ve Arduino'nun GND'si birbirine bağlı olmalı; yoksa motorlar komut almaz. Kod yüklerken Arduino USB'den beslenir.</div>
         <div class="note"><b>Bağlamadan önce: ENA / ENB köprüsü</b>L298N'deki ENA ve ENB üzerindeki küçük köprüyü (jumper) çıkarın. Köprü takılıyken motor hep tam hızla döner ve Arduino'nun pini zorlanır.</div>
-        <p class="muted">Bu pinler bizim eğitim setimiz içindir. Yarışmada parçalar farklıysa kodun başındaki pin satırlarını değiştirirsiniz; ama hız (ENA, ENB) yalnız 3, 5, 6 ya da 11. pine bağlanabilir, servo varken 9 ve 10 hız için kullanılamaz. HY-SRF05'in OUT pini boş kalır.</p>
+        <p class="muted">Bu pinler bizim eğitim setimiz içindir. Yarışmada parçalar farklıysa kodun başındaki pin satırlarını değiştirirsiniz; ama hız (ENA, ENB) yalnız 3, 5, 6 ya da 11. pine bağlanabilir, servo varken 9 ve 10 hız için kullanılamaz. mBlock bloklarında kutulara bu tablodaki pin numaralarını yazın. HY-SRF05'in OUT pini boş kalır.</p>
       </div>
     </div>
 
@@ -589,7 +592,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
           <li>Tekerlekler havadayken <b>Yükle</b>'ye basın. Yükleme bitince USB'yi çıkarıp robotu yere koyun.</li>
           <li>Merak ederseniz kod düğmesiyle (<code>&lt;/&gt;</code>) mBlock'un bloklardan ürettiği Arduino kodunu görebilirsiniz. Bu kodu <a href="#evde">Wokwi</a>'ye de yapıştırabilirsiniz.</li>
         </ol>
-        <p class="muted">Blok akışlarında <span class="b ex mini">mavi kesikli</span> bloklar eklentiden gelir; yazı, bloğun ne yapacağını anlatır. Turuncu ve sarı bloklar mBlock'un kendi blokları, yeşil bloklar işlem bloklarıdır.</p>
+        <p class="muted">Blok akışları mBlock'taki renklerle çizildi: <span class="b mo mini">kırmızı</span> L298N motor sürücü (Uğur Coşar eklentisi), <span class="b ln mini">turkuaz</span> çizgi sensörü (ALPGEN M052 eklentisi), <span class="b pn mini">mavi</span> Pin ve Sensör (mBlock'un kendi blokları: servo, mesafe, seri port). <b>Motor1 sol motor, Motor2 sağ motordur.</b> Hız ve süre gibi sayılar için Değişkenler'den değişken oluşturun.</p>
       </details>
       <details class="helper">
         <summary>İsteğe bağlı: metin koduyla (Arduino IDE) yükleme</summary>
@@ -605,12 +608,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
         <table class="trouble">
           <thead><tr><th>Ne oluyor?</th><th>Önce bunu deneyin</th></tr></thead>
           <tbody>
-            <tr><td>Robot çizgiden kaçıyor, ters düzeltiyor</td><td>1. uygulamaya dönün: "sağa dön"de robot kendi sağına mı dönüyor? Değilse sol ve sağ motor kablolarını yer değiştirin. Sonra <code>SIYAH_LOW</code>'u kontrol edin.</td></tr>
+            <tr><td>Robot çizgiden kaçıyor, ters düzeltiyor</td><td>1. uygulamaya dönün: "sağa dön"de robot kendi sağına mı dönüyor? Değilse sol ve sağ motor kablolarını yer değiştirin. Sonra <code>SIYAH</code> değerini kontrol edin.</td></tr>
             <tr><td>Kod yüklenmiyor</td><td>Kart "Arduino Uno" ve port doğru mu? USB kablosunu çıkarıp takın. Seri Monitör açıksa kapatıp yeniden yükleyin.</td></tr>
             <tr><td>Motorlar hiç dönmüyor</td><td>Pil takılı ve dolu mu? ENA/ENB köprüleri çıkarılıp 5 ve 6'ya bağlandı mı? GND'ler ortak mı?</td></tr>
             <tr><td>Bir teker geri dönüyor</td><td>O motorun iki kablosunu sürücüde yer değiştirin.</td></tr>
             <tr><td>Motor çalışınca Arduino yeniden başlıyor</td><td>Pil zayıf olabilir; şarj edin. Motorları Arduino'nun 5V'undan beslemediğinizden emin olun.</td></tr>
-            <tr><td>Çizgi sensörü hep aynı şeyi gösteriyor</td><td>VCC ve GND bağlı mı? Kart üstündeki ışıklar yanıp sönüyor mu? Vidayı (trimpot) çevirin, sensörü yere yaklaştırın.</td></tr>
+            <tr><td>Çizgi sensörü hep aynı şeyi gösteriyor</td><td>VCC ve GND bağlı mı? Sensörün ışıkları siyahta ve beyazda değişiyor mu? Sensörü yere 1–2 cm yaklaştırın; kartta ayar vidası varsa azar azar çevirin.</td></tr>
             <tr><td>Mesafe hep "ölçüm yok"</td><td>TRIG ve ECHO yer değiştirmiş olabilir. Sensörün önü boş ve düz bir yüzeye mi bakıyor?</td></tr>
             <tr><td>Servo vızıldıyor ya da titriyor</td><td>Açı mekanizmanın sınırını zorluyor: açıyı 5° geri alın. Hâlâ titriyorsa öğretmene söyleyin (besleme yetmiyor olabilir).</td></tr>
           </tbody>
@@ -639,13 +642,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
         <button class="btn small" type="button" id="copyValues">Kod satırı olarak kopyala</button>
       </div>
       <div class="values-grid">
-        <label>SIYAH_LOW <small>Uygulama 2</small>
-          <select data-v="SIYAH_LOW" data-type="bool"><option value="">seçin</option><option value="true">true (siyahta 0)</option><option value="false">false (siyahta 1)</option></select></label>
+        <label>SIYAH <small>Uygulama 2 · siyahta gelen değer</small>
+          <select data-v="SIYAH"><option value="">seçin</option><option value="0">0</option><option value="1">1</option></select></label>
         <label>DONUS_HIZI <small>Uygulama 1</small><input data-v="DONUS_HIZI" inputmode="numeric" placeholder="100"></label>
         <label>DONUS_MS <small>Uygulama 1</small><input data-v="DONUS_MS" inputmode="numeric" placeholder="450"></label>
         <label>SAG_AYAR <small>Uygulama 1</small><input data-v="SAG_AYAR" inputmode="numeric" placeholder="0"></label>
         <label>En düşük hız <small>Uygulama 1</small><input data-v="EN_DUSUK_HIZ" inputmode="numeric" placeholder="60"></label>
-        <label>ACIK (kıskaç) <small>Uygulama 4</small><input data-v="ACIK" inputmode="numeric" placeholder="110"></label>
+        <label>ACIK (kıskaç) <small>Uygulama 4 · servo pin 13</small><input data-v="ACIK" inputmode="numeric" placeholder="110"></label>
         <label>KAPALI (kıskaç) <small>Uygulama 4</small><input data-v="KAPALI" inputmode="numeric" placeholder="55"></label>
         <label>SOL_ACI (radar) <small>Uygulama 8</small><input data-v="SOL_ACI" inputmode="numeric" placeholder="150"></label>
         <label>SAG_ACI (radar) <small>Uygulama 8</small><input data-v="SAG_ACI" inputmode="numeric" placeholder="30"></label>
@@ -675,7 +678,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;padding-top:20p
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> robot üç denemede de aynı "L" şeklini çiziyor.</p>
           <p class="ex-more"><b>Bir adım öte:</b> <code>HIZ</code>'ı 10'ar azaltıp robotun hâlâ hareket ettiği en düşük hızı bulun. <code>DONUS_MS</code>, <code>DONUS_HIZI</code> ve en düşük hızı <a href="#degerler">robotumuzun değerleri</a> kartına yazın; sonraki uygulamalarda lazım.</p>
-          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ex">İki motoru durdur</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ex">Sol motor ileri, sağ motor ileri · hız: HIZ</span></li><li><span class="b ct">1,5 saniye bekle</span></li><li><span class="b ex">İki motoru durdur</span></li><li><span class="b ct">0,5 saniye bekle</span></li><li><span class="b ex">Sol motor ileri, sağ motor geri · hız: DONUS_HIZI (sağa döner)</span></li><li><span class="b ct">DONUS saniye bekle (örnek: 0,45)</span></li><li><span class="b ex">İki motoru durdur</span></li></ol><p class="muted blocks-note">mBlock'ta bekleme saniyedir: 450 ms = 0,45 saniye.</p></div>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: HIZ</span></li><li><span class="b ct">1,5 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li><li><span class="b ct">0,5 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: DONUS_HIZI</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: DONUS_HIZI</span></li><li><span class="b ct">DONUS saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol><p class="muted blocks-note">Motor1 sol, Motor2 sağ motordur; sol ileri + sağ geri robotu sağa döndürür. DONUS saniye cinsindendir (örnek 0,45).</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/01_motor_hareket.ino" download>İndir</a><button class="btn small" type="button" data-copy="k01">Kopyala</button></div><pre><code id="k01" data-src="kodlar/01_motor_hareket.ino">// 1. MOTORLAR: duz git, 90 derece don, yine duz git
 // Pinler sayfadaki ortak baglanti tablosuna goredir.
 // Acildiktan 3 sn sonra bir kez calisir. Tekrar icin RESET dugmesine basin.
@@ -722,23 +725,22 @@ void loop() {
         </article>
 
         <article class="ex" id="u2">
-          <div class="ex-top"><span class="ex-n">2</span><div><h4>Çizgi sensörü: siyah mı beyaz mı?</h4><div class="chips"><span>4'lü çizgi sensörü</span></div></div><span class="ex-time">~15 dk</span></div>
-          <p class="goal">Dört göz de siyahı ve beyazı doğru ayırsın.</p>
+          <div class="ex-top"><span class="ex-n">2</span><div><h4>Çizgi sensörü: siyah mı beyaz mı?</h4><div class="chips"><span>ALPGEN M052 (3 göz)</span></div></div><span class="ex-time">~15 dk</span></div>
+          <p class="goal">Üç göz de siyahı ve beyazı doğru ayırsın.</p>
           <ol class="steps">
-            <li>Kodu yükleyin, Seri Monitör'ü açın (9600).</li>
-            <li>Sensör beyaz zemindeyken dört göz de <code>.</code> göstermeli.</li>
-            <li>Siyah bandın üstünde <code>#</code> göstermeli. Tersiyse <code>SIYAH_LOW</code>'u <code>false</code> yapın.</li>
-            <li>Yanlış okuyan gözün vidasını (trimpot) küçük tornavidayla azar azar çevirin.</li>
-            <li>Bulduğunuz <code>SIYAH_LOW</code> değerini <a href="#degerler">robotumuzun değerleri</a> kartına yazın; çizgi kullanan bütün kodlarda aynısı olmalı.</li>
+            <li>Blok akışını kurup yükleyin, seri port penceresini açın.</li>
+            <li>Sensör beyaz zemindeyken üç gözün değerine bakın, sonra siyah bandın üstünde bakın.</li>
+            <li>Siyahta 0 mı geliyor, 1 mi? Bu sayıyı <code>SIYAH</code> değişkeni olarak <a href="#degerler">robotumuzun değerleri</a> kartına yazın. Çizgi kullanan bütün bloklarda bu değişkeni kullanacağız.</li>
+            <li>Değerler kararsızsa sensörü yere 1–2 cm yaklaştırın; kartta ayar vidası varsa azar azar çevirin.</li>
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> bandı soldan sağa geçirince yazı "solda → ortada → sağda" diye değişiyor.</p>
           <p class="ex-more"><b>Bir adım öte:</b> sensörü yerden 0,5 cm, 1 cm, 1,5 cm yukarıda deneyin. Hangi yükseklik en iyi okuyor? Unutmayın: yarışmada pistin ışığı farklı olacak ve itiraz kabul edilmiyor; ayarı orada yeniden yapacaksınız.</p>
-          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in ct"><li><span class="b ex">Çizgi sensörünün gözlerini oku (her göz: siyah mı, beyaz mı?)</span></li><li><span class="b ex">Gözlerin değerlerini Seri port / ekrana yaz</span></li><li><span class="b ct">0,2 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">Siyahta hangi değerin (0 ya da 1) geldiğini deftere yazın.</p></div>
-          <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/02_cizgi_sensoru.ino" download>İndir</a><button class="btn small" type="button" data-copy="k02">Kopyala</button></div><pre><code id="k02" data-src="kodlar/02_cizgi_sensoru.ino">// 2. CIZGI SENSORU: dort gozu oku, cizginin nerede oldugunu yaz
-// OUT1-OUT4 soldan saga A0-A3. Seri Monitor: 9600 baud.
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ln">Line Following Left 2, Middle 3, Right 4</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b pn">seri port: yazdır <span class="b ln in-b">Left Durum</span> , <span class="b ln in-b">Middle Durum</span> , <span class="b ln in-b">Right Durum</span></span></li><li><span class="b ct">0,2 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">Siyahta gelen sayıyı (0 ya da 1) SIYAH değişkeni olarak not edin.</p></div>
+          <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/02_cizgi_sensoru.ino" download>İndir</a><button class="btn small" type="button" data-copy="k02">Kopyala</button></div><pre><code id="k02" data-src="kodlar/02_cizgi_sensoru.ino">// 2. CIZGI SENSORU (ALPGEN M052): uc gozu oku, cizginin nerede oldugunu yaz
+// Sol -&gt; 2, Orta -&gt; 3, Sag -&gt; 4. Seri Monitor: 9600 baud.
 
-const byte CIZGI[4] = {A0, A1, A2, A3};
-const bool SIYAH_LOW = true;  // Siyahta 0 okunuyorsa true, 1 okunuyorsa false yapin
+const byte CIZGI[3] = {2, 3, 4};   // M052: sol, orta, sag
+const bool SIYAH_LOW = true;       // Siyahta 0 okunuyorsa true, 1 okunuyorsa false yapin
 
 bool cizgiVar(byte pin) {
   int d = digitalRead(pin);
@@ -747,24 +749,22 @@ bool cizgiVar(byte pin) {
 
 void setup() {
   Serial.begin(9600);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
 }
 
 void loop() {
-  bool s[4];
-  for (byte i = 0; i &lt; 4; i++) {
+  bool s[3];
+  for (byte i = 0; i &lt; 3; i++) {
     s[i] = cizgiVar(CIZGI[i]);
     Serial.print(s[i] ? "# " : ". ");   // # = siyah, . = beyaz
   }
 
-  int sol = s[0] + s[1];
-  int sag = s[2] + s[3];
   Serial.print("  -&gt; ");
-  if (sol + sag == 0)      Serial.println("cizgi yok");
-  else if (sol + sag == 4) Serial.println("genis bant ya da kavsak");
-  else if (sol &gt; sag)      Serial.println("cizgi solda");
-  else if (sag &gt; sol)      Serial.println("cizgi sagda");
-  else                     Serial.println("cizgi ortada");
+  if (!s[0] &amp;&amp; !s[1] &amp;&amp; !s[2])    Serial.println("cizgi yok");
+  else if (s[0] &amp;&amp; s[1] &amp;&amp; s[2])  Serial.println("genis bant ya da kavsak");
+  else if (s[0] &amp;&amp; !s[2])         Serial.println("cizgi solda");
+  else if (s[2] &amp;&amp; !s[0])         Serial.println("cizgi sagda");
+  else                            Serial.println("cizgi ortada");
 
   delay(150);
 }</code></pre></details>
@@ -781,7 +781,7 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> 10–30 cm arasında fark 2 cm'den az.</p>
           <p class="ex-more"><b>Bir adım öte:</b> hangi cisimlerde "ölçüm yok" çıktı? Ses dalgasına ne olmuş olabilir?</p>
-          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in ct"><li><span class="b va">mesafe değişkenini <span class="b ex in-b">mesafe sensörünü oku (cm)</span> yap</span></li><li><span class="b ct">eğer ⟨mesafe = 0⟩ ise</span><ol class="bk in ct"><li><span class="b ex">"ölçüm yok" yaz</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in ct"><li><span class="b ex">mesafe değerini yaz</span></li></ol></li><li><span class="b ct">0,2 saniye bekle</span></li></ol></li></ol></div>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b va">mesafe değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b pn">seri port: yazdır mesafe</span></li><li><span class="b ct">0,2 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">Ölçüm alınamayınca (çok uzak, kumaş, eğik yüzey) blok 0 ya da çok büyük bir sayı verebilir; hangisini verdiğini deftere yazın.</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/03_mesafe_sensoru.ino" download>İndir</a><button class="btn small" type="button" data-copy="k03">Kopyala</button></div><pre><code id="k03" data-src="kodlar/03_mesafe_sensoru.ino">// 3. MESAFE SENSORU (HC-SR04 / HY-SRF05): olc, ortalamasini al, cubuk ciz
 // TRIG -&gt; 11, ECHO -&gt; 12. Seri Monitor: 9600 baud.
 
@@ -840,14 +840,14 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> kol iki açı arasında takılmadan gidip geliyor, açılar deftere yazıldı.</p>
           <p class="ex-more"><b>Bir adım öte:</b> Lego'dan bir kıskaç yapın. Bir kalemi düşürmeden tutabiliyor mu?</p>
-          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in ct"><li><span class="b ex">Servo açısını 40 yap</span></li><li><span class="b ct">1 saniye bekle</span></li><li><span class="b ex">Servo açısını 90 yap</span></li><li><span class="b ct">1 saniye bekle</span></li><li><span class="b ex">Servo açısını 140 yap</span></li><li><span class="b ct">1 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">Açık ve kapalı açıyı bulmak için 40 ve 140'ı değiştirip yeniden yükleyin.</p></div>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b pn">servo pin 13 açı 40</span></li><li><span class="b ct">1 saniye bekle</span></li><li><span class="b pn">servo pin 13 açı 90</span></li><li><span class="b ct">1 saniye bekle</span></li><li><span class="b pn">servo pin 13 açı 140</span></li><li><span class="b ct">1 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">Açık ve kapalı açıyı bulmak için 40 ve 140'ı değiştirip yeniden yükleyin.</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/04_servo_aci.ino" download>İndir</a><button class="btn small" type="button" data-copy="k04">Kopyala</button></div><pre><code id="k04" data-src="kodlar/04_servo_aci.ino">// 4. SERVO: Seri Monitor'den aci yaz, servo o aciya gitsin
-// Sinyal -&gt; 3. Seri Monitor: 9600 baud, satir sonu "Yeni satir".
+// Sinyal -&gt; 13. Seri Monitor: 9600 baud, satir sonu "Yeni satir".
 
 #include &lt;Servo.h&gt;
 
 Servo kol;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 const int EN_AZ = 10, EN_COK = 170;   // Guvenli sinirlar; mekanizmaya gore daraltin
 
 void setup() {
@@ -894,6 +894,7 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> elinizi yavaşça çekince robot peşinizden geliyor. Masada değil, yerde deneyin.</p>
           <p class="ex-more"><b>Bir adım öte:</b> el uzaktaysa hızlı, yakındaysa yavaş gitsin.</p>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b va">mesafe değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b ct">eğer ⟨mesafe &gt; 18⟩ ve ⟨mesafe &lt; 60⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: HIZ</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b ct">eğer ⟨mesafe &gt; 0⟩ ve ⟨mesafe &lt; 12⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: Geri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: HIZ</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol></li></ol></li><li><span class="b ct">0,03 saniye bekle</span></li></ol></li></ol></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/05_elimi_takip_et.ino" download>İndir</a><button class="btn small" type="button" data-copy="k05">Kopyala</button></div><pre><code id="k05" data-src="kodlar/05_elimi_takip_et.ino">// 5. MESAFE + MOTOR: elimi takip et
 // Robot onundeki ele ya da kutuya 15 cm uzaklikta durmaya calisir:
 // uzaklasirsan gelir, yaklasirsan geri kacar.
@@ -957,13 +958,14 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> robot 1 dakika boyunca alanın dışına çıkmıyor.</p>
           <p class="ex-more"><b>Bir adım öte:</b> dönüşü <code>delay(DONUS_MS + random(0, 300))</code> yapın; robot her seferinde başka yol çizer.</p>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b ln">Line Following Left 2, Middle 3, Right 4</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b ct">eğer ⟨<span class="b ln in-b">Left Durum</span> = SIYAH⟩ veya ⟨<span class="b ln in-b">Middle Durum</span> = SIYAH⟩ veya ⟨<span class="b ln in-b">Right Durum</span> = SIYAH⟩ ise</span><ol class="bk in"><li><span class="b va">solKenar değişkenini <span class="b ln in-b">Left Durum</span> yap</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li><li><span class="b ct">0,1 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Yön: Geri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: HIZ</span></li><li><span class="b ct">0,4 saniye bekle</span></li><li><span class="b ct">eğer ⟨solKenar = SIYAH⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: DONUS_HIZI</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: DONUS_HIZI</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: Geri Hız: DONUS_HIZI</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: DONUS_HIZI</span></li></ol></li><li><span class="b ct">DONUS saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: HIZ</span></li></ol></li></ol></li></ol><p class="muted blocks-note">Kenar soldaysa sağa, sağdaysa sola döner. solKenar'ı geri gitmeden önce kaydediyoruz; geri gidince sensör beyaz görür.</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/06_alanda_kal.ino" download>İndir</a><button class="btn small" type="button" data-copy="k06">Kopyala</button></div><pre><code id="k06" data-src="kodlar/06_alanda_kal.ino">// 6. CIZGI + MOTOR: siyah bantla cevrili alanin icinde kal
 // Beyaz zemine siyah bantla bir alan cizin. Robot ileri gider,
 // kenari gorunce geri cekilip iceri doner.
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int HIZ = 90;
@@ -990,15 +992,15 @@ bool cizgiVar(byte pin) {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   randomSeed(analogRead(A5));   // "Bir adim ote" icin: random() her acilista farkli olsun
   delay(3000);
 }
 
 void loop() {
-  bool solKenar = cizgiVar(CIZGI[0]) || cizgiVar(CIZGI[1]);
-  bool sagKenar = cizgiVar(CIZGI[2]) || cizgiVar(CIZGI[3]);
+  bool solKenar = cizgiVar(CIZGI[0]);
+  bool sagKenar = cizgiVar(CIZGI[2]) || cizgiVar(CIZGI[1]);
 
   if (!solKenar &amp;&amp; !sagKenar) {
     sur(HIZ, HIZ);              // Alan icinde: ileri
@@ -1025,14 +1027,14 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> robot pisti üç tur çizgiden çıkmadan dönüyor.</p>
           <p class="ex-more"><b>Bir adım öte:</b> tur süresini ölçün, <code>HIZ</code>'ı artırıp rekor deneyin. P kontrollü sürüm <a href="#kod">başlangıç taslağında</a>.</p>
-          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in ct"><li><span class="b ct">eğer ⟨sol iç siyah <i>ve</i> sağ iç siyah⟩ ise</span><ol class="bk in ct"><li><span class="b ex">İki motor ileri · hız: HIZ</span></li></ol></li><li><span class="b ct">değilse eğer ⟨sol dış siyah⟩ ise</span><ol class="bk in ct"><li><span class="b ex">Sol motor yavaş, sağ motor HIZ (sola sert)</span></li></ol></li><li><span class="b ct">değilse eğer ⟨sol iç siyah⟩ ise</span><ol class="bk in ct"><li><span class="b ex">Sol motor YAVAS, sağ motor HIZ (sola hafif)</span></li></ol></li><li><span class="b ct">değilse eğer ⟨sağ dış siyah⟩ ise</span><ol class="bk in ct"><li><span class="b ex">Sol motor HIZ, sağ motor yavaş (sağa sert)</span></li></ol></li><li><span class="b ct">değilse eğer ⟨sağ iç siyah⟩ ise</span><ol class="bk in ct"><li><span class="b ex">Sol motor HIZ, sağ motor YAVAS (sağa hafif)</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in ct"><li><span class="b ex">İki motoru durdur (çizgi yok)</span></li></ol></li></ol></li></ol><p class="muted blocks-note">mBlock'ta "değilse eğer" yoktur: "eğer … ise / değilse" bloklarını iç içe koyun.</p></div>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b ln">Line Following Left 2, Middle 3, Right 4</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b ct">eğer ⟨<span class="b ln in-b">Middle Durum</span> = SIYAH⟩ ve ⟨Left Durum = Right Durum⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: HIZ</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b ct">eğer ⟨<span class="b ln in-b">Left Durum</span> = SIYAH⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: YAVAS</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: HIZ</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b ct">eğer ⟨<span class="b ln in-b">Right Durum</span> = SIYAH⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: YAVAS</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol></li></ol></li></ol></li></ol></li></ol><p class="muted blocks-note">mBlock'ta "değilse eğer" yoktur; "eğer … ise / değilse" bloklarını iç içe koyun. YAVAS, HIZ'dan küçük olmalı (örnek: HIZ 100, YAVAS 40).</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/07_cizgi_izle.ino" download>İndir</a><button class="btn small" type="button" data-copy="k07">Kopyala</button></div><pre><code id="k07" data-src="kodlar/07_cizgi_izle.ino">// 7. CIZGI + MOTOR: cizgi izle (mantiksal yontem)
 // Cizgi kaybolursa son gordugu tarafa yavasca doner ve arar.
 // 1,5 saniyede bulamazsa guvenli durur.
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;   // 2. uygulamada buldugunuz deger
 
 const int HIZ = 100;      // Duz giderken
@@ -1062,22 +1064,22 @@ bool cizgiVar(byte pin) {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }
 
 void loop() {
-  bool s[4];
-  for (byte i = 0; i &lt; 4; i++) s[i] = cizgiVar(CIZGI[i]);
-  bool goruyor = s[0] || s[1] || s[2] || s[3];
+  bool s[3];
+  for (byte i = 0; i &lt; 3; i++) s[i] = cizgiVar(CIZGI[i]);
+  bool goruyor = s[0] || s[1] || s[2];
   if (goruyor) kayipBaslangic = 0;
 
-  if (s[1] &amp;&amp; s[2])  { sur(HIZ, HIZ);       sonYon = 0;  }  // Ortada: duz
-  else if (s[0])     { sur(YAVAS / 2, HIZ); sonYon = -1; }  // Cok solda: sert sola
-  else if (s[1])     { sur(YAVAS, HIZ);     sonYon = -1; }  // Biraz solda
-  else if (s[3])     { sur(HIZ, YAVAS / 2); sonYon = 1;  }  // Cok sagda: sert saga
-  else if (s[2])     { sur(HIZ, YAVAS);     sonYon = 1;  }  // Biraz sagda
+  if (s[1] &amp;&amp; s[0] == s[2]) { sur(HIZ, HIZ);       sonYon = 0;  }  // Ortada: duz
+  else if (s[0] &amp;&amp; s[1])    { sur(YAVAS, HIZ);     sonYon = -1; }  // Biraz solda
+  else if (s[0])            { sur(YAVAS / 2, HIZ); sonYon = -1; }  // Cok solda: sert sola
+  else if (s[2] &amp;&amp; s[1])    { sur(HIZ, YAVAS);     sonYon = 1;  }  // Biraz sagda
+  else if (s[2])            { sur(HIZ, YAVAS / 2); sonYon = 1;  }  // Cok sagda: sert saga
   else {                                                    // Cizgi kayip
     if (kayipBaslangic == 0) kayipBaslangic = millis();
     if (millis() - kayipBaslangic &gt; ARAMA_MS) sur(0, 0);   // Bulamadi: dur
@@ -1099,6 +1101,7 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> elinizi hangi yöne tutarsanız o yön "en açık yön" olmaktan çıkıyor.</p>
           <p class="ex-more"><b>Bir adım öte:</b> 30°'den 150°'ye 20'şer derece, yedi yöne baksın.</p>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b pn">servo pin 13 açı 150</span></li><li><span class="b ct">0,4 saniye bekle</span></li><li><span class="b va">sol değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b pn">servo pin 13 açı 90</span></li><li><span class="b ct">0,4 saniye bekle</span></li><li><span class="b va">on değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b pn">servo pin 13 açı 30</span></li><li><span class="b ct">0,4 saniye bekle</span></li><li><span class="b va">sag değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b pn">seri port: yazdır sol , on , sag</span></li><li><span class="b ct">1 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">150° gerçekten sola mı bakıyor? Değilse 150 ile 30'un yerini değiştirin.</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/08_radar.ino" download>İndir</a><button class="btn small" type="button" data-copy="k08">Kopyala</button></div><pre><code id="k08" data-src="kodlar/08_radar.ino">// 8. SERVO + MESAFE: radar
 // Servo uzerindeki mesafe sensoru 5 yone bakar, en acik yonu yazar.
 // Motorlar calismaz; robot masada durabilir. Seri Monitor: 9600 baud.
@@ -1106,7 +1109,7 @@ void loop() {
 #include &lt;Servo.h&gt;
 
 const byte TRIG = 11, ECHO = 12;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 const int ACILAR[5] = {30, 60, 90, 120, 150};   // 30 = sag, 150 = sol (montaja gore degisebilir)
 
 Servo kafa;
@@ -1186,6 +1189,7 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> robot 2 dakika boyunca kutu gibi sert, düz yüzlü engellerin hiçbirine çarpmıyor. Kumaş ve yumuşak cisimleri sensör iyi göremez.</p>
           <p class="ex-more"><b>Bir adım öte:</b> sol da sağ da kapalıysa robot geri dönsün (180°).</p>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b pn">servo pin 13 açı 90</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b va">on değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b ct">eğer ⟨on &gt; 20⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: HIZ</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li><li><span class="b mo">L298N: Motor1 Yön: Geri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: HIZ</span></li><li><span class="b ct">0,25 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li><li><span class="b pn">servo pin 13 açı 150</span></li><li><span class="b ct">0,45 saniye bekle</span></li><li><span class="b va">sol değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b pn">servo pin 13 açı 30</span></li><li><span class="b ct">0,45 saniye bekle</span></li><li><span class="b va">sag değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b pn">servo pin 13 açı 90</span></li><li><span class="b ct">eğer ⟨sol &gt; sag⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: Geri Hız: DONUS_HIZI</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: DONUS_HIZI</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: DONUS_HIZI</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: DONUS_HIZI</span></li></ol></li><li><span class="b ct">DONUS saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol></li></ol></li></ol><p class="muted blocks-note">Mesafe bloğu ölçüm alamayınca 0 veriyorsa (3. uygulamada gördünüz), "on &gt; 20" yerine "on &gt; 20 veya on = 0" kullanmayın; robot kumaşa çarpabilir.</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/09_engelden_kac.ino" download>İndir</a><button class="btn small" type="button" data-copy="k09">Kopyala</button></div><pre><code id="k09" data-src="kodlar/09_engelden_kac.ino">// 9. MOTOR + SERVO + MESAFE: engelden kacan robot
 // Ileri gider; onde engel varsa durur, saga ve sola bakar, acik tarafa doner.
 // Sensor servonun ustunde (8. uygulamadaki gibi).
@@ -1195,7 +1199,7 @@ void loop() {
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int HIZ = 90;
 const int ENGEL_CM = 20;
@@ -1281,11 +1285,12 @@ void loop() {
           <p class="goal">Robot pisti izlerken önüne konan engelde dursun, engel kalkınca devam etsin.</p>
           <ol class="steps">
             <li>Mesafe sensörünü önde sabit takın; servo gerekmez.</li>
-            <li>7. uygulamadaki pisti ve ayarladığınız <code>HIZ</code>, <code>YAVAS</code>, <code>SIYAH_LOW</code> değerlerini kullanın.</li>
+            <li>7. uygulamadaki pisti ve ayarladığınız <code>HIZ</code>, <code>YAVAS</code>, <code>SIYAH</code> değerlerini kullanın.</li>
             <li>Robot yoldayken önüne bir kutu koyun, sonra kaldırın.</li>
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> robot kutuya değmeden duruyor, kutu kalkınca hemen devam ediyor.</p>
           <p class="ex-more"><b>Bir adım öte:</b> engel 5 saniye kalkmazsa robot geri dönüp yolu ters yönde izlesin.</p>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b ln">Line Following Left 2, Middle 3, Right 4</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b va">mesafe değişkenini <span class="b se in-b">mesafe algılayıcı 11 trig pin 12 echo pin</span> yap</span></li><li><span class="b ct">eğer ⟨mesafe &gt; 0⟩ ve ⟨mesafe &lt; 15⟩ ise</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol></li><li><span class="b ct">değilse</span><ol class="bk in"><li><span class="b ct">… 7. uygulamadaki çizgi izleme blokları …</span></li></ol></li></ol></li></ol></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/10_cizgide_engel_bekle.ino" download>İndir</a><button class="btn small" type="button" data-copy="k10">Kopyala</button></div><pre><code id="k10" data-src="kodlar/10_cizgide_engel_bekle.ino">// 10. CIZGI + MESAFE + MOTOR: cizgiyi izle, onde engel varsa bekle
 // Engel (el, kutu) kalkinca robot yoluna devam eder.
 // Mesafe 60 ms'de bir olculur; cizgi her dongude okunur.
@@ -1293,7 +1298,7 @@ void loop() {
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;          // 2. uygulamadaki deger
 
 const int HIZ = 90, YAVAS = 45, ARA = 70;   // 7. uygulamada ayarladiginiz degerler
@@ -1330,15 +1335,15 @@ bool cizgiVar(byte pin) {
 }
 
 void cizgiIzle() {
-  bool s[4];
-  for (byte i = 0; i &lt; 4; i++) s[i] = cizgiVar(CIZGI[i]);
-  if (s[0] || s[1] || s[2] || s[3]) kayipBaslangic = 0;
+  bool s[3];
+  for (byte i = 0; i &lt; 3; i++) s[i] = cizgiVar(CIZGI[i]);
+  if (s[0] || s[1] || s[2]) kayipBaslangic = 0;
 
-  if (s[1] &amp;&amp; s[2])  { sur(HIZ, HIZ);       sonYon = 0;  }
-  else if (s[0])     { sur(YAVAS / 2, HIZ); sonYon = -1; }
-  else if (s[1])     { sur(YAVAS, HIZ);     sonYon = -1; }
-  else if (s[3])     { sur(HIZ, YAVAS / 2); sonYon = 1;  }
-  else if (s[2])     { sur(HIZ, YAVAS);     sonYon = 1;  }
+  if (s[1] &amp;&amp; s[0] == s[2]) { sur(HIZ, HIZ);       sonYon = 0;  }  // Ortada: duz
+  else if (s[0] &amp;&amp; s[1])    { sur(YAVAS, HIZ);     sonYon = -1; }  // Biraz solda
+  else if (s[0])            { sur(YAVAS / 2, HIZ); sonYon = -1; }  // Cok solda: sert sola
+  else if (s[2] &amp;&amp; s[1])    { sur(HIZ, YAVAS);     sonYon = 1;  }  // Biraz sagda
+  else if (s[2])            { sur(HIZ, YAVAS / 2); sonYon = 1;  }  // Cok sagda: sert saga
   else {
     if (kayipBaslangic == 0) kayipBaslangic = millis();
     if (millis() - kayipBaslangic &gt; ARAMA_MS) sur(0, 0);
@@ -1352,7 +1357,7 @@ void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }
@@ -1380,6 +1385,7 @@ void loop() {
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> üç denemenin en az ikisinde kutu düşmeden alınıyor.</p>
           <p class="ex-more"><b>Bir adım öte:</b> geri çekildikten sonra kutu hâlâ önünde değilse robot yeniden denesin.</p>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b pn">servo pin 13 açı ACIK</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">⟨⟨mesafe algılayıcı … &lt; AL_CM⟩ ve ⟨… &gt; 0⟩⟩ olana kadar tekrarla</span><ol class="bk in"><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: 80</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: 80</span></li></ol></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li><li><span class="b ct">0,3 saniye bekle</span></li><li><span class="b pn">servo pin 13 açı KAPALI</span></li><li><span class="b ct">0,6 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Yön: Geri Hız: 80</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: 80</span></li><li><span class="b ct">0,6 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol><p class="muted blocks-note">AL_CM: kutu kıskacın içindeyken ölçülen mesafe. Sensör kıskacın en az 5 cm gerisinde olmalı.</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/11_yaklas_ve_al.ino" download>İndir</a><button class="btn small" type="button" data-copy="k11">Kopyala</button></div><pre><code id="k11" data-src="kodlar/11_yaklas_ve_al.ino">// 11. MESAFE + MOTOR + SERVO KISKAC: nesneye yaklas ve al
 // Mesafe sensoru onde sabit ve kiskacin en az 5 cm gerisinde olmali
 // (cok yakindaki cismi sensor goremez). Servo kiskaci acar/kapatir.
@@ -1389,7 +1395,7 @@ void loop() {
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int YAKLASMA_HIZI = 80;
 const int AL_CM = 8;                  // Nesne kiskacin icine girdiginde olculen mesafe
@@ -1469,12 +1475,13 @@ void loop() {
           <p class="goal">Yükü çizgi boyunca taşı, hedef bantta bırak, geri çekil.</p>
           <ol class="steps">
             <li>Pistin sonuna sensörden geniş bir siyah bant (hedef) yapıştırın.</li>
-            <li><code>ACIK</code>/<code>KAPALI</code>'ya 4. uygulamanın açılarını, <code>HIZ</code>/<code>YAVAS</code>/<code>SIYAH_LOW</code>'a 7. uygulamanın değerlerini yazın.</li>
+            <li><code>ACIK</code>/<code>KAPALI</code>'ya 4. uygulamanın açılarını, <code>HIZ</code>/<code>YAVAS</code>/<code>SIYAH</code>'a 7. uygulamanın değerlerini yazın.</li>
             <li>Robot açılınca kıskaç açılır; 3 saniye içinde yükü kıskaca koyun, kıskaç kapanır ve robot yola çıkar.</li>
             <li>Robot hedefe varmadan duruyorsa <code>BANT_OKUMA</code>'yı artırın.</li>
           </ol>
           <p class="ex-ok"><b>Başarılı sayılır:</b> yük hedef bandın içine bırakılıyor, robot geri çekilip duruyor.</p>
           <p class="ex-more"><b>Neden önemli:</b> görev adımlarını sırayla yazmanın (GIT → BIRAK → BITTI) en basit örneği. Yarışmada tema ne olursa olsun bu kalıbı kullanacağız.</p>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b ln">Line Following Left 2, Middle 3, Right 4</span></li><li><span class="b pn">servo pin 13 açı ACIK</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b pn">servo pin 13 açı KAPALI</span></li><li><span class="b ct">1 saniye bekle</span></li><li><span class="b ct">⟨<span class="b ln in-b">Left Durum</span> = SIYAH⟩ ve ⟨<span class="b ln in-b">Middle Durum</span> = SIYAH⟩ ve ⟨<span class="b ln in-b">Right Durum</span> = SIYAH⟩ olana kadar tekrarla</span><ol class="bk in"><li><span class="b ct">… 7. uygulamadaki çizgi izleme blokları …</span></li></ol></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li><li><span class="b ct">0,3 saniye bekle</span></li><li><span class="b pn">servo pin 13 açı ACIK</span></li><li><span class="b ct">0,6 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Yön: Geri Hız: HIZ</span></li><li><span class="b mo">L298N: Motor2 Yön: Geri Hız: HIZ</span></li><li><span class="b ct">0,5 saniye bekle</span></li><li><span class="b mo">L298N: Motor1 Durdur.</span></li><li><span class="b mo">L298N: Motor2 Durdur.</span></li></ol><p class="muted blocks-note">Üç göz birden siyah = hedef bant. Robot bandı erken görüyorsa bandı sensörden geniş yapın. Bu, görev adımlarını sırayla yazmanın (GİT → BIRAK → BİTTİ) blok hâlidir.</p></div>
           <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/12_gorev_zinciri.ino" download>İndir</a><button class="btn small" type="button" data-copy="k12">Kopyala</button></div><pre><code id="k12" data-src="kodlar/12_gorev_zinciri.ino">// 12. GOREV ZINCIRI: cizgide git, hedef bantta dur, yuku birak, geri cekil
 // Acilista kiskac acilir; 3 saniye icinde yuku kiskaca koyun, kiskac kapanir.
 // Hedef: cizginin sonundaki genis siyah bant.
@@ -1483,9 +1490,9 @@ void loop() {
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;        // 2. uygulamadaki deger
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int HIZ = 80, YAVAS = 40, ARA = 70;   // 7. uygulamadaki degerler
 const int ACIK = 110, KAPALI = 55;          // 4. uygulamadaki acilar
@@ -1497,7 +1504,7 @@ Adim adim = GIT;
 byte bantSayaci = 0;
 int sonYon = 0;
 unsigned long kayipBaslangic = 0;
-bool s[4];
+bool s[3];
 
 Servo kiskac;
 
@@ -1518,12 +1525,12 @@ bool cizgiVar(byte pin) {
 }
 
 void cizgiIzle() {
-  if (s[0] || s[1] || s[2] || s[3]) kayipBaslangic = 0;
-  if (s[1] &amp;&amp; s[2])  { sur(HIZ, HIZ);       sonYon = 0;  }
-  else if (s[0])     { sur(YAVAS / 2, HIZ); sonYon = -1; }
-  else if (s[1])     { sur(YAVAS, HIZ);     sonYon = -1; }
-  else if (s[3])     { sur(HIZ, YAVAS / 2); sonYon = 1;  }
-  else if (s[2])     { sur(HIZ, YAVAS);     sonYon = 1;  }
+  if (s[0] || s[1] || s[2]) kayipBaslangic = 0;
+  if (s[1] &amp;&amp; s[0] == s[2]) { sur(HIZ, HIZ);       sonYon = 0;  }  // Ortada: duz
+  else if (s[0] &amp;&amp; s[1])    { sur(YAVAS, HIZ);     sonYon = -1; }  // Biraz solda
+  else if (s[0])            { sur(YAVAS / 2, HIZ); sonYon = -1; }  // Cok solda: sert sola
+  else if (s[2] &amp;&amp; s[1])    { sur(HIZ, YAVAS);     sonYon = 1;  }  // Biraz sagda
+  else if (s[2])            { sur(HIZ, YAVAS / 2); sonYon = 1;  }  // Cok sagda: sert saga
   else {
     if (kayipBaslangic == 0) kayipBaslangic = millis();
     if (millis() - kayipBaslangic &gt; ARAMA_MS) sur(0, 0);
@@ -1536,7 +1543,7 @@ void cizgiIzle() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   kiskac.attach(SERVO_PIN);
   kiskac.write(ACIK);               // Yuku koymak icin ac
@@ -1546,11 +1553,11 @@ void setup() {
 }
 
 void loop() {
-  for (byte i = 0; i &lt; 4; i++) s[i] = cizgiVar(CIZGI[i]);
+  for (byte i = 0; i &lt; 3; i++) s[i] = cizgiVar(CIZGI[i]);
 
   switch (adim) {
     case GIT: {
-      bool bant = s[0] &amp;&amp; s[1] &amp;&amp; s[2] &amp;&amp; s[3];
+      bool bant = s[0] &amp;&amp; s[1] &amp;&amp; s[2];
       bantSayaci = bant ? bantSayaci + 1 : 0;
       if (bantSayaci &gt;= BANT_OKUMA) { sur(0, 0); adim = BIRAK; }
       else cizgiIzle();
@@ -1585,7 +1592,7 @@ void loop() {
   <div class="wrap">
     <div class="sh">
       <h2>Çizgi izleme: Mantıksal, P, PD</h2>
-      <p>MEB Robot'ta gördüğünüz üç yöntemi burada kendi 4'lü sensörümüze uyarlıyoruz. Sensörümüz her göz için yalnız "siyah / beyaz" der; bu yüzden hata yedi değerden birini alır: −3, −2, −1, 0, +1, +2, +3.</p>
+      <p>MEB Robot'ta gördüğünüz üç yöntemi burada kendi 3 gözlü sensörümüze (ALPGEN M052) uyarlıyoruz. Gözlere sol −2, orta 0, sağ +2 puan veriyoruz; siyah gören gözlerin ortalaması hatadır. Hata beş değerden birini alır: −2, −1, 0, +1, +2.</p>
     </div>
 
     <div class="algo-cards">
@@ -1604,10 +1611,9 @@ void loop() {
           <button type="button" data-mode="pd" aria-pressed="false">PD</button>
         </div>
         <div class="eyes" role="group" aria-label="Sensör gözleri, soldan sağa">
-          <button type="button" class="eye" data-i="0" aria-pressed="false"><span>Sol dış</span><b>−3</b></button>
-          <button type="button" class="eye" data-i="1" aria-pressed="true"><span>Sol iç</span><b>−1</b></button>
-          <button type="button" class="eye" data-i="2" aria-pressed="true"><span>Sağ iç</span><b>+1</b></button>
-          <button type="button" class="eye" data-i="3" aria-pressed="false"><span>Sağ dış</span><b>+3</b></button>
+          <button type="button" class="eye" data-i="0" aria-pressed="false"><span>Sol</span><b>−2</b></button>
+          <button type="button" class="eye" data-i="1" aria-pressed="true"><span>Orta</span><b>0</b></button>
+          <button type="button" class="eye" data-i="2" aria-pressed="false"><span>Sağ</span><b>+2</b></button>
         </div>
         <div class="sliders">
           <label>Temel hız <output id="oBase">100</output><input type="range" id="rBase" min="40" max="200" step="5" value="100"></label>
@@ -1628,7 +1634,7 @@ void loop() {
         </div>
         <p class="sim-say" id="vSay">Robot dümdüz gider.</p>
         <p class="muted" id="vRule"></p>
-        <p class="muted sim-note">Simülatör yalnız hesabı gösterir; gerçek robotta pil, zemin ve tekerlek de etkiler. D terimi yalnız bir göz değiştiği anda görünür: 4 dijital gözle hata birden "sıçrar", D o sıçramayı frenler.</p>
+        <p class="muted sim-note">Simülatör yalnız hesabı gösterir; gerçek robotta pil, zemin ve tekerlek de etkiler. D terimi yalnız bir göz değiştiği anda görünür: 3 dijital gözle hata birden "sıçrar", D o sıçramayı frenler.</p>
       </div>
     </div>
 
@@ -1666,20 +1672,20 @@ void loop() {
         </ol>
         <p class="ex-ok"><b>Başarılı sayılır:</b> üç tur çizgiden çıkmadan, mantıksaldan daha yumuşak dönüyor.</p>
         <p class="ex-more"><b>Bir adım öte:</b> en hızlı turu atan ekip hangi <code>KP</code> ve hızı kullandı?</p>
-          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b va">KP değişkenini 25 yap</span></li><li><span class="b va">TEMEL değişkenini 100 yap</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in ct"><li><span class="b va">toplam değişkenini 0 yap</span></li><li><span class="b va">gören değişkenini 0 yap</span></li><li><span class="b ct">eğer ⟨sol dış siyah⟩ ise</span><ol class="bk in ct"><li><span class="b va">toplam'ı −3 değiştir</span></li><li><span class="b va">gören'i 1 değiştir</span></li></ol></li><li><span class="b ct">eğer ⟨sol iç siyah⟩ ise</span><ol class="bk in ct"><li><span class="b va">toplam'ı −1 değiştir</span></li><li><span class="b va">gören'i 1 değiştir</span></li></ol></li><li><span class="b ct">eğer ⟨sağ iç siyah⟩ ise</span><ol class="bk in ct"><li><span class="b va">toplam'ı 1 değiştir</span></li><li><span class="b va">gören'i 1 değiştir</span></li></ol></li><li><span class="b ct">eğer ⟨sağ dış siyah⟩ ise</span><ol class="bk in ct"><li><span class="b va">toplam'ı 3 değiştir</span></li><li><span class="b va">gören'i 1 değiştir</span></li></ol></li><li><span class="b ct">eğer ⟨gören &gt; 0⟩ ise</span><ol class="bk in ct"><li><span class="b va">hata değişkenini <span class="b op in-b">toplam / gören</span> yap</span></li></ol></li><li><span class="b va">düzeltme değişkenini <span class="b op in-b">KP × hata</span> yap</span></li><li><span class="b ex">Sol motor ileri · hız: <span class="b op in-b">TEMEL + düzeltme</span></span></li><li><span class="b ex">Sağ motor ileri · hız: <span class="b op in-b">TEMEL − düzeltme</span></span></li></ol></li></ol><p class="muted blocks-note">Çizgi kaybolunca hata eski değerinde kalır, robot son yöne döner. Motor bloğu eksi hız kabul etmiyorsa, hız 0'ın altına düşünce 0 yapın.</p></div>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b ln">Line Following Left 2, Middle 3, Right 4</span></li><li><span class="b va">KP değişkenini 25 yap</span></li><li><span class="b va">TEMEL değişkenini 100 yap</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b va">toplam değişkenini 0 yap</span></li><li><span class="b va">gören değişkenini 0 yap</span></li><li><span class="b ct">eğer ⟨<span class="b ln in-b">Left Durum</span> = SIYAH⟩ ise</span><ol class="bk in"><li><span class="b va">toplam değişkenini -2 değiştir</span></li><li><span class="b va">gören değişkenini 1 değiştir</span></li></ol></li><li><span class="b ct">eğer ⟨<span class="b ln in-b">Middle Durum</span> = SIYAH⟩ ise</span><ol class="bk in"><li><span class="b va">gören değişkenini 1 değiştir</span></li></ol></li><li><span class="b ct">eğer ⟨<span class="b ln in-b">Right Durum</span> = SIYAH⟩ ise</span><ol class="bk in"><li><span class="b va">toplam değişkenini 2 değiştir</span></li><li><span class="b va">gören değişkenini 1 değiştir</span></li></ol></li><li><span class="b ct">eğer ⟨gören &gt; 0⟩ ise</span><ol class="bk in"><li><span class="b va">hata değişkenini <span class="b op in-b">toplam / gören</span> yap</span></li></ol></li><li><span class="b va">düzeltme değişkenini <span class="b op in-b">KP × hata</span> yap</span></li><li><span class="b va">solHız değişkenini <span class="b op in-b">TEMEL + düzeltme</span> yap</span></li><li><span class="b va">sağHız değişkenini <span class="b op in-b">TEMEL − düzeltme</span> yap</span></li><li><span class="b ct">eğer ⟨solHız &lt; 0⟩ ise</span><ol class="bk in"><li><span class="b va">solHız değişkenini 0 yap</span></li></ol></li><li><span class="b ct">eğer ⟨sağHız &lt; 0⟩ ise</span><ol class="bk in"><li><span class="b va">sağHız değişkenini 0 yap</span></li></ol></li><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: solHız</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: sağHız</span></li></ol></li></ol><p class="muted blocks-note">Çizgi kaybolunca hata eski değerinde kalır, robot son yöne döner. Motor bloğu eksi hız almadığı için hız 0'ın altına düşünce 0 yapıyoruz.</p></div>
         <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/13_cizgi_p.ino" download>İndir</a><button class="btn small" type="button" data-copy="k13">Kopyala</button></div><pre><code id="k13" data-src="kodlar/13_cizgi_p.ino">// 13. CIZGI IZLEME: P KONTROL
 // Cizgi ortadan ne kadar uzaksa o kadar cok duzeltir.
-// Hata: en sol -3, ic sol -1, ic sag +1, en sag +3 (goren gozlerin ortalamasi).
+// Hata: sol -2, orta 0, sag +2 (goren gozlerin ortalamasi): -2, -1, 0, +1, +2.
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int TEMEL_HIZ = 100;   // Cizgi tam ortadayken iki tekerin hizi
 const int KP = 25;           // Hata basina duzeltme miktari. Once bunu ayarlayin.
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
+const int AGIRLIK[3] = {-2, 0, 2};
 const unsigned long ARAMA_MS = 1500;   // Cizgi bu kadar sure gorulmezse dur
 int sonHata = 0;
 unsigned long sonGorulme = 0;          // Cizginin en son goruldugu an
@@ -1700,14 +1706,14 @@ bool cizgiVar(byte pin) {
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
 
-// Cizginin ortadan uzakligi: -3 (cok solda) ... 0 (ortada) ... +3 (cok sagda)
+// Cizginin ortadan uzakligi: -2 (cok solda) ... 0 (ortada) ... +2 (cok sagda)
 int hataOku() {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i &lt; 4; i++) {
+  for (byte i = 0; i &lt; 3; i++) {
     if (cizgiVar(CIZGI[i])) { toplam += AGIRLIK[i]; goren++; }
   }
   if (goren == 0) {                 // Cizgi kayip: son gorulen tarafa en sert donus
-    return sonHata &lt; 0 ? -4 : (sonHata &gt; 0 ? 4 : 0);
+    return sonHata &lt; 0 ? -3 : (sonHata &gt; 0 ? 3 : 0);
   }
   sonGorulme = millis();
   sonHata = toplam / goren;
@@ -1717,7 +1723,7 @@ int hataOku() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
   sonGorulme = millis();
@@ -1742,21 +1748,21 @@ void loop() {
         </ol>
         <p class="ex-ok"><b>Başarılı sayılır:</b> PD turu, P turundan daha kısa ve robot çizgiden çıkmıyor.</p>
         <p class="ex-more"><b>Bir adım öte:</b> <code>delay(5)</code>'i 20 yapın. D neden kötüleşti? (İpucu: D, iki ölçüm arasındaki değişime bakıyor.)</p>
-          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b va">KP'yi 22, KD'yi 15, TEMEL'i 120 yap</span></li><li><span class="b va">önceki değişkenini 0 yap</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in ct"><li><span class="b ct">… hatayı 13. uygulamadaki gibi hesapla …</span></li><li><span class="b va">değişim değişkenini <span class="b op in-b">hata − önceki</span> yap</span></li><li><span class="b va">önceki değişkenini hata yap</span></li><li><span class="b va">düzeltme değişkenini <span class="b op in-b">KP × hata + KD × değişim</span> yap</span></li><li><span class="b ex">Sol motor ileri · hız: <span class="b op in-b">TEMEL + düzeltme</span></span></li><li><span class="b ex">Sağ motor ileri · hız: <span class="b op in-b">TEMEL − düzeltme</span></span></li><li><span class="b ct">0,01 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">Bekleme süresi her turda aynı olmalı; D, iki ölçüm arasındaki değişime bakar.</p></div>
+          <div class="blocks"><p class="blocks-h">mBlock blok akışı</p><ol class="bk"><li><span class="b ev">Arduino Uno başladığında</span></li><li><span class="b mo">L298N Tanımla MOTOR1 ENA: 5 IN1: 7 IN2: 8 – MOTOR2 ENB: 6 IN3: 9 IN4: 10</span></li><li><span class="b ln">Line Following Left 2, Middle 3, Right 4</span></li><li><span class="b va">KP değişkenini 22 yap</span></li><li><span class="b va">KD değişkenini 15 yap</span></li><li><span class="b va">TEMEL değişkenini 120 yap</span></li><li><span class="b va">önceki değişkenini 0 yap</span></li><li><span class="b ct">3 saniye bekle</span></li><li><span class="b ct">sürekli tekrarla</span><ol class="bk in"><li><span class="b ct">… hatayı 13. uygulamadaki gibi hesapla …</span></li><li><span class="b va">değişim değişkenini <span class="b op in-b">hata − önceki</span> yap</span></li><li><span class="b va">önceki değişkenini hata yap</span></li><li><span class="b va">düzeltme değişkenini <span class="b op in-b">KP × hata + KD × değişim</span> yap</span></li><li><span class="b va">solHız değişkenini <span class="b op in-b">TEMEL + düzeltme</span> yap</span></li><li><span class="b va">sağHız değişkenini <span class="b op in-b">TEMEL − düzeltme</span> yap</span></li><li><span class="b ct">eğer ⟨solHız &lt; 0⟩ ise</span><ol class="bk in"><li><span class="b va">solHız değişkenini 0 yap</span></li></ol></li><li><span class="b ct">eğer ⟨sağHız &lt; 0⟩ ise</span><ol class="bk in"><li><span class="b va">sağHız değişkenini 0 yap</span></li></ol></li><li><span class="b mo">L298N: Motor1 Yön: İleri Hız: solHız</span></li><li><span class="b mo">L298N: Motor2 Yön: İleri Hız: sağHız</span></li><li><span class="b ct">0,01 saniye bekle</span></li></ol></li></ol><p class="muted blocks-note">Bekleme her turda aynı olmalı; D, iki ölçüm arasındaki değişime bakar.</p></div>
         <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/14_cizgi_pd.ino" download>İndir</a><button class="btn small" type="button" data-copy="k14">Kopyala</button></div><pre><code id="k14" data-src="kodlar/14_cizgi_pd.ino">// 14. CIZGI IZLEME: PD KONTROL
 // P: hata ne kadar buyuk?   D: hata ne kadar hizli degisiyor?
 // D, robotun cizginin iki yanina savrulmasini (zikzak) azaltir.
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int TEMEL_HIZ = 120;
 const int KP = 22;           // 13. uygulamada buldugunuz degerden biraz kucuk baslayin
 const int KD = 15;           // 0'dan baslayip artirin; zikzak azalinca durun
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
+const int AGIRLIK[3] = {-2, 0, 2};
 int sonHata = 0;             // Kayip durumunda yon icin
 int oncekiHata = 0;          // D icin bir onceki dongudeki hata
 const unsigned long ARAMA_MS = 1500;   // Cizgi bu kadar sure gorulmezse dur
@@ -1780,11 +1786,11 @@ bool cizgiVar(byte pin) {
 
 int hataOku() {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i &lt; 4; i++) {
+  for (byte i = 0; i &lt; 3; i++) {
     if (cizgiVar(CIZGI[i])) { toplam += AGIRLIK[i]; goren++; }
   }
   if (goren == 0) {
-    return sonHata &lt; 0 ? -4 : (sonHata &gt; 0 ? 4 : 0);
+    return sonHata &lt; 0 ? -3 : (sonHata &gt; 0 ? 3 : 0);
   }
   sonGorulme = millis();
   sonHata = toplam / goren;
@@ -1794,7 +1800,7 @@ int hataOku() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
   sonGorulme = millis();
@@ -1834,11 +1840,11 @@ void loop() {
         <p class="ex-more"><b>İpucu:</b> robot kavşağın ortasına gelmeden dönüyorsa <code>ORTALA_MS</code>'yi artırın. Plan <code>PLAN[]</code> listesinde.</p>
         <details><summary>Metin karşılığı (Arduino C)</summary><div class="code-bar"><a class="btn small" href="kodlar/15_kavsak_plani.ino" download>İndir</a><button class="btn small" type="button" data-copy="k15">Kopyala</button></div><pre><code id="k15" data-src="kodlar/15_kavsak_plani.ino">// 15. SENARYO: KAVSAK PLANI
 // Cizgiyi P kontrolle izle. Her kavsakta PLAN listesindeki hareketi yap.
-// Kavsak = dort goz birden siyah (cizgiye dik, sensorden genis bir bant).
+// Kavsak = uc goz birden siyah (cizgiye dik, sensorden genis bir bant).
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int HIZ = 90, KP = 25, DONUS_HIZI = 80;
@@ -1848,8 +1854,8 @@ enum Hareket { DUZ, SOLA, SAGA, DUR };
 const Hareket PLAN[] = { SAGA, SOLA, DUZ, DUR };   // Pistinize gore degistirin
 const byte PLAN_UZUNLUK = sizeof(PLAN) / sizeof(PLAN[0]);
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
-bool s[4];
+const int AGIRLIK[3] = {-2, 0, 2};
+bool s[3];
 int sonHata = 0;
 byte kavsakNo = 0;
 byte bantSayaci = 0;
@@ -1871,15 +1877,15 @@ bool cizgiVar(byte pin) {
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
 void sensorOku() {
-  for (byte i = 0; i &lt; 4; i++) s[i] = cizgiVar(CIZGI[i]);
+  for (byte i = 0; i &lt; 3; i++) s[i] = cizgiVar(CIZGI[i]);
 }
 
 void pTakip(int temel) {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i &lt; 4; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
+  for (byte i = 0; i &lt; 3; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
   int hata;
   if (goren &gt; 0) { hata = toplam / goren; sonHata = hata; }
-  else hata = sonHata &lt; 0 ? -4 : (sonHata &gt; 0 ? 4 : 0);
+  else hata = sonHata &lt; 0 ? -3 : (sonHata &gt; 0 ? 3 : 0);
   int d = KP * hata;
   sur(temel + d, temel - d);
 }
@@ -1889,7 +1895,7 @@ void cizgiyeDon(int yon) {                 // yon: -1 sol, +1 sag
   sur(yon * DONUS_HIZI, -yon * DONUS_HIZI);
   delay(200);                              // Once eski cizgiden ayril
   unsigned long baslangic = millis();
-  do { sensorOku(); } while (!(s[1] || s[2]) &amp;&amp; millis() - baslangic &lt; 2000);
+  do { sensorOku(); } while (!s[1] &amp;&amp; millis() - baslangic &lt; 2000);
   sur(0, 0);
   sonHata = 0;
 }
@@ -1906,7 +1912,7 @@ void kavsakta(Hareket h) {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }
@@ -1915,7 +1921,7 @@ void loop() {
   if (bitti) { sur(0, 0); return; }
 
   sensorOku();
-  bool kavsak = s[0] &amp;&amp; s[1] &amp;&amp; s[2] &amp;&amp; s[3];
+  bool kavsak = s[0] &amp;&amp; s[1] &amp;&amp; s[2];
   bantSayaci = kavsak ? bantSayaci + 1 : 0;
 
   if (bantSayaci &gt;= 3) {                   // 3 okuma ust uste: gercekten kavsak
@@ -1944,15 +1950,15 @@ void loop() {
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int HIZ = 85, KP = 25, ARAMA_HIZI = 65;
 const unsigned long BOSLUK_MS = 500;   // Bu kadar sure duz git (bosluk uzunluguna gore)
 const unsigned long ARAMA_MS = 1200;   // Sonra bu kadar sure don ve ara
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
-bool s[4];
+const int AGIRLIK[3] = {-2, 0, 2};
+bool s[3];
 int sonHata = 0;
 unsigned long kayipBaslangic = 0;      // 0 = cizgi kayip degil
 
@@ -1975,14 +1981,14 @@ bool cizgiVar(byte pin) {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }
 
 void loop() {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i &lt; 4; i++) {
+  for (byte i = 0; i &lt; 3; i++) {
     s[i] = cizgiVar(CIZGI[i]);
     if (s[i]) { toplam += AGIRLIK[i]; goren++; }
   }
@@ -2027,7 +2033,7 @@ void loop() {
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int HIZ = 85, KP = 25, DONUS_HIZI = 100;
@@ -2036,8 +2042,8 @@ const int DONUS_MS = 450;     // 90 derece (1. uygulama)
 const int YAN_MS = 600;       // Engelin yanina cikma suresi
 const int GEC_MS = 900;       // Engelin yanindan gecme suresi
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
-bool s[4];
+const int AGIRLIK[3] = {-2, 0, 2};
+bool s[3];
 int sonHata = 0;
 
 void motor(byte pwm, byte in1, byte in2, int hiz) {
@@ -2064,16 +2070,16 @@ bool cizgiVar(byte pin) {
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
 void sensorOku() {
-  for (byte i = 0; i &lt; 4; i++) s[i] = cizgiVar(CIZGI[i]);
+  for (byte i = 0; i &lt; 3; i++) s[i] = cizgiVar(CIZGI[i]);
 }
-bool herhangiCizgi() { return s[0] || s[1] || s[2] || s[3]; }
+bool herhangiCizgi() { return s[0] || s[1] || s[2]; }
 
 void pTakip(int temel) {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i &lt; 4; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
+  for (byte i = 0; i &lt; 3; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
   int hata;
   if (goren &gt; 0) { hata = toplam / goren; sonHata = hata; }
-  else hata = sonHata &lt; 0 ? -4 : (sonHata &gt; 0 ? 4 : 0);
+  else hata = sonHata &lt; 0 ? -3 : (sonHata &gt; 0 ? 3 : 0);
   int d = KP * hata;
   sur(temel + d, temel - d);
 }
@@ -2094,7 +2100,7 @@ void dolas() {
 
   sur(DONUS_HIZI, -DONUS_HIZI); delay(200);  // Saga donerek cizgiye hizalan
   baslangic = millis();
-  do { sensorOku(); } while (!(s[1] || s[2]) &amp;&amp; millis() - baslangic &lt; 2000);
+  do { sensorOku(); } while (!s[1] &amp;&amp; millis() - baslangic &lt; 2000);
   sur(0, 0);
   sonHata = 0;
 }
@@ -2103,7 +2109,7 @@ void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }
@@ -2132,17 +2138,17 @@ void loop() {
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int HIZ = 85, KP = 25;
 const byte DURAK_SAYISI = 3;
 const int BEKLEME_MS = 2000;
 const int KAPI_KAPALI = 90, KAPI_ACIK = 150;
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
-bool s[4];
+const int AGIRLIK[3] = {-2, 0, 2};
+bool s[3];
 int sonHata = 0;
 byte durakNo = 0;
 byte bantSayaci = 0;
@@ -2167,10 +2173,10 @@ bool cizgiVar(byte pin) {
 
 void pTakip(int temel) {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i &lt; 4; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
+  for (byte i = 0; i &lt; 3; i++) if (s[i]) { toplam += AGIRLIK[i]; goren++; }
   int hata;
   if (goren &gt; 0) { hata = toplam / goren; sonHata = hata; }
-  else hata = sonHata &lt; 0 ? -4 : (sonHata &gt; 0 ? 4 : 0);
+  else hata = sonHata &lt; 0 ? -3 : (sonHata &gt; 0 ? 3 : 0);
   int d = KP * hata;
   sur(temel + d, temel - d);
 }
@@ -2188,7 +2194,7 @@ void durakta() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   kapi.attach(SERVO_PIN);
   kapi.write(KAPI_KAPALI);
   sur(0, 0);
@@ -2198,8 +2204,8 @@ void setup() {
 void loop() {
   if (durakNo &gt;= DURAK_SAYISI) { sur(0, 0); return; }   // Hat bitti
 
-  for (byte i = 0; i &lt; 4; i++) s[i] = cizgiVar(CIZGI[i]);
-  bool bant = s[0] &amp;&amp; s[1] &amp;&amp; s[2] &amp;&amp; s[3];
+  for (byte i = 0; i &lt; 3; i++) s[i] = cizgiVar(CIZGI[i]);
+  bool bant = s[0] &amp;&amp; s[1] &amp;&amp; s[2];
   bantSayaci = bant ? bantSayaci + 1 : 0;
 
   if (bantSayaci &gt;= 3) { bantSayaci = 0; durakta(); return; }
@@ -2225,7 +2231,7 @@ void loop() {
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte SERVO_PIN = 3;
+const byte SERVO_PIN = 13;
 
 const int HIZ = 90, DONUS_HIZI = 100;
 const int ACIK_CM = 25;       // Bundan uzaksa o yon acik
@@ -2312,7 +2318,7 @@ void loop() {
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
 const byte TRIG = 11, ECHO = 12;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int ITME_HIZI = 110;
@@ -2345,7 +2351,7 @@ bool cizgiVar(byte pin) {
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
 bool kenarda() {
-  for (byte i = 0; i &lt; 4; i++) if (cizgiVar(CIZGI[i])) return true;
+  for (byte i = 0; i &lt; 3; i++) if (cizgiVar(CIZGI[i])) return true;
   return false;
 }
 
@@ -2353,7 +2359,7 @@ void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
 }
@@ -2413,7 +2419,7 @@ void loop() {
       </div>
       <dl class="wokwi-legend">
         <dt>Mesafe sensörü (solda)</dt><dd>Simülasyon çalışırken sensöre tıklayın; kaydırıcıyla mesafeyi değiştirin.</dd>
-        <dt>Çizgi sensörü (alttaki 4 anahtar)</dt><dd>Soldan sağa: en sol göz … en sağ göz. Başta hepsi beyaz görür; bir anahtarı öbür yana kaydırınca o göz siyah görür.</dd>
+        <dt>Çizgi sensörü (alttaki 3 anahtar)</dt><dd>Soldan sağa: sol, orta, sağ göz. Başta hepsi beyaz görür; bir anahtarı öbür yana kaydırınca o göz siyah görür.</dd>
         <dt>Motorlar (üstteki 6 LED)</dt><dd>Yeşil = ileri, kırmızı = geri, sarı = hız (ne kadar parlaksa o kadar hızlı). Soldaki üçlü sol motor, sağdaki üçlü sağ motor.</dd>
         <dt>Servo (sağda)</dt><dd>Kolu, koddaki açıya döner.</dd>
         <dt>Wokwi'de olmayanlar</dt><dd>Gerçek motor, tekerlek ve zemin yok. Dönüş süresi, hız ve sensör yüksekliği gibi ayarlar robotta bulunur.</dd>
@@ -2803,8 +2809,8 @@ void loop() {
 
       <article class="home" id="evde1">
         <h3><span>Ders 1'den sonra</span>Parçayı tanı</h3>
-        <fieldset class="quiz" data-answer="a" data-hint="# siyah demek; soldaki iki göz siyah görüyor.">
-          <legend>Seri Monitör'de <code># # . .</code> görüyorsunuz. Çizgi nerede?</legend>
+        <fieldset class="quiz" data-answer="a" data-hint="# siyah demek; sol ve orta göz siyah görüyor.">
+          <legend>Seri Monitör'de <code># # .</code> görüyorsunuz (sol, orta, sağ). Çizgi nerede?</legend>
           <label><input type="radio" name="e1q1" value="a"> Solda</label>
           <label><input type="radio" name="e1q1" value="b"> Sağda</label>
           <label><input type="radio" name="e1q1" value="c"> Ortada</label>
@@ -2829,8 +2835,8 @@ void loop() {
 
       <article class="home" id="evde2">
         <h3><span>Ders 2'den sonra</span>İki parça birlikte</h3>
-        <fieldset class="quiz" data-answer="a" data-hint="Kural: iki iç göz siyahsa düz git.">
-          <legend>7. kodda iki iç göz siyah, dış gözler beyaz. Robot ne yapar?</legend>
+        <fieldset class="quiz" data-answer="a" data-hint="Kural: orta göz siyah, yanlar beyazsa düz git.">
+          <legend>7. uygulamada orta göz siyah, sol ve sağ beyaz. Robot ne yapar?</legend>
           <label><input type="radio" name="e2q1" value="a"> Düz gider</label>
           <label><input type="radio" name="e2q1" value="b"> Sola döner</label>
           <label><input type="radio" name="e2q1" value="c"> Durur</label>
@@ -2850,8 +2856,8 @@ void loop() {
           <label><input type="radio" name="e2q3" value="c"> Temel hızı artırırım</label>
           <p class="quiz-fb" aria-live="polite"></p>
         </fieldset>
-        <div class="task"><b>Wokwi görevi</b> <a href="#u7">7. uygulamanın</a> kodunu çalıştırın. Önce iki ortadaki anahtarı "siyah" yapın: hangi LED'ler yanıyor? Sonra yalnız en soldakini siyah bırakın: hangi motor yavaşladı? Hepsini beyaz yapınca 1,5 saniye sonra ne oluyor?</div>
-        <div class="task"><b>Simülatör görevi</b> <a href="#sim">Simülatörde</a> P'yi seçin, yalnız sol dış gözü siyah yapın. Kp'yi 10'dan 50'ye çıkarın: "sert" yazısı hangi değerde başlıyor?</div>
+        <div class="task"><b>Wokwi görevi</b> <a href="#u7">7. uygulamanın</a> kodunu çalıştırın. Önce ortadaki anahtarı "siyah" yapın: hangi LED'ler yanıyor? Sonra yalnız soldakini siyah bırakın: hangi motor yavaşladı? Hepsini beyaz yapınca 1,5 saniye sonra ne oluyor?</div>
+        <div class="task"><b>Simülatör görevi</b> <a href="#sim">Simülatörde</a> P'yi seçin, yalnız sol gözü siyah yapın. Kp'yi 10'dan 50'ye çıkarın: "sert" yazısı hangi değerde başlıyor?</div>
       </article>
 
       <article class="home" id="evde3">
@@ -2903,7 +2909,7 @@ void loop() {
           <label><input type="radio" name="e4q3" value="b"> Hayır</label>
           <p class="quiz-fb" aria-live="polite"></p>
         </fieldset>
-        <div class="task"><b>Wokwi görevi</b> <a href="#kod">Başlangıç taslağını</a> çalıştırın, Seri Monitör'ü açın. Adım numaraları: 1 çizgi takip, 2 yaklaş, 3 al, 4 dön, 5 bırak, 6 bitti. Mesafeyi önce 20, sonra 8 cm yapın; adımlar sırayla ilerliyor mu? 5'e gelince dört anahtarı birden siyah yapın: robot durup kolu açıyor mu?</div>
+        <div class="task"><b>Wokwi görevi</b> <a href="#kod">Başlangıç taslağını</a> çalıştırın, Seri Monitör'ü açın. Adım numaraları: 1 çizgi takip, 2 yaklaş, 3 al, 4 dön, 5 bırak, 6 bitti. Mesafeyi önce 20, sonra 8 cm yapın; adımlar sırayla ilerliyor mu? 5'e gelince üç anahtarı birden siyah yapın: robot durup kolu açıyor mu?</div>
         <div class="task"><b>Ekipçe</b> <a href="#canta">Çanta listesini</a> birlikte işaretleyin ve <a href="#gun">24 saat planını</a> bir kez okuyun.</div>
       </article>
 
@@ -3059,7 +3065,7 @@ void loop() {
     </div>
 
     <div class="panel" role="tabpanel" id="p-sk" aria-labelledby="t-sk">
-      <div class="panel-head"><p><b>Başlangıç taslağı.</b> Motor + 4'lü çizgi + HC-SR04 + servo, görev adımlarıyla.</p><div class="code-bar" style="margin:0"><a class="btn small" href="kodlar/00_baslangic_taslagi.ino" download>İndir</a><button class="btn small" type="button" data-copy="c-sk">Kopyala</button></div></div>
+      <div class="panel-head"><p><b>Başlangıç taslağı (metin).</b> Motor + 3 gözlü çizgi sensörü + HC-SR04 + servo, görev adımlarıyla. Blok sürümünü 12. uygulamanın akışından kurun.</p><div class="code-bar" style="margin:0"><a class="btn small" href="kodlar/00_baslangic_taslagi.ino" download>İndir</a><button class="btn small" type="button" data-copy="c-sk">Kopyala</button></div></div>
 <pre><code id="c-sk" data-src="kodlar/00_baslangic_taslagi.ino">// TYY BASLANGIC TASLAGI - Odemis BILSEM
 // Pinler ORNEKTIR. Kendi baglantiniza gore degistirin.
 #include &lt;Servo.h&gt;
@@ -3068,8 +3074,8 @@ void loop() {
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;   // L298N sol motor
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;  // L298N sag motor
 const byte TRIG = 11, ECHO = 12;                    // HC-SR04
-const byte SERVO_PIN = 3;                           // Servo sinyal
-const byte CIZGI[4] = {A0, A1, A2, A3};             // 4'lu sensor, soldan saga
+const byte SERVO_PIN = 13;                           // Servo sinyal
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 
 // ---- AYARLAR (testte bulun) ----
 const bool SIYAH_LOW = true;   // Siyahta sensor LOW veriyorsa true
@@ -3118,21 +3124,21 @@ long mesafeCm() {
 }
 
 // ---- CIZGI ----
-bool s[4];
+bool s[3];
 int sonHata = 0;
 bool cizgiVar(byte pin) {
   int d = digitalRead(pin);
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
-int sensorSay() {   // Kac goz cizgiyi goruyor? (0-4)
+int sensorSay() {   // Kac goz cizgiyi goruyor? (0-3)
   int n = 0;
-  for (byte i = 0; i &lt; 4; i++) { s[i] = cizgiVar(CIZGI[i]); if (s[i]) n++; }
+  for (byte i = 0; i &lt; 3; i++) { s[i] = cizgiVar(CIZGI[i]); if (s[i]) n++; }
   return n;
 }
-void cizgiTakip(int hiz) {   // P kontrol, agirliklar -3 -1 +1 +3
-  const int AGIRLIK[4] = {-3, -1, 1, 3};
+void cizgiTakip(int hiz) {   // P kontrol, agirliklar -2 0 +2
+  const int AGIRLIK[3] = {-2, 0, 2};
   long toplam = 0; int n = 0;
-  for (byte i = 0; i &lt; 4; i++) if (s[i]) { toplam += AGIRLIK[i]; n++; }
+  for (byte i = 0; i &lt; 3; i++) if (s[i]) { toplam += AGIRLIK[i]; n++; }
   int hata = (n &gt; 0) ? toplam / n : sonHata;
   sonHata = hata;
   int duzeltme = KP * hata;
@@ -3144,7 +3150,7 @@ void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
   pinMode(TRIG, OUTPUT); pinMode(ECHO, INPUT);
-  for (byte i = 0; i &lt; 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i &lt; 3; i++) pinMode(CIZGI[i], INPUT);
   kol.attach(SERVO_PIN);
   kol.write(SERVO_ACIK);
   dur();
@@ -3185,8 +3191,8 @@ void loop() {
       if (adimSuresi() &gt; (unsigned long)DONUS_MS * 2) { dur(); adimaGec(BIRAK); }
       break;
 
-    case BIRAK:                       // Hedef: 4 sensor de siyah (genis bant)
-      if (gorenSensor == 4) {
+    case BIRAK:                       // Hedef: 3 goz de siyah (genis bant)
+      if (gorenSensor == 3) {
         dur();
         kol.write(SERVO_ACIK);
         adimaGec(BITTI);
@@ -3464,8 +3470,8 @@ void loop() {
   // Line-following simulator (mirrors kodlar/07, 13, 14)
   const sim = $('#sim');
   if (sim) {
-    const W = [-3, -1, 1, 3];
-    const eyes = [false, true, true, false];
+    const W = [-2, 0, 2];
+    const eyes = [false, true, false];
     let mode = 'p', prevErr = 0, lastSide = 0;
     const rBase = $('#rBase'), rKp = $('#rKp'), rKd = $('#rKd');
     sim.dataset.mode = mode;
@@ -3474,7 +3480,7 @@ void loop() {
       let t = 0, n = 0;
       eyes.forEach((on, i) => { if (on) { t += W[i]; n++; } });
       if (n) return Math.trunc(t / n);              // Arduino'daki tamsayi bolme gibi
-      return lastSide < 0 ? -4 : lastSide > 0 ? 4 : 0;
+      return lastSide < 0 ? -3 : lastSide > 0 ? 3 : 0;
     };
     const clamp = v => Math.max(-255, Math.min(255, Math.round(v)));
     const bar = (el, out, v) => {
@@ -3497,12 +3503,12 @@ void loop() {
       let L, R, rule = '';
       if (mode === 'logic') {
         const H = base, Y = Math.round(base * 0.45), A = 60;
-        const [s0, s1, s2, s3] = eyes;
-        if (s1 && s2)    { L = H; R = H; rule = 'Kural: iki iç göz siyah → düz git.'; }
-        else if (s0)     { L = Math.trunc(Y / 2); R = H; rule = 'Kural: sol dış göz siyah → sola sert dön.'; }
-        else if (s1)     { L = Y; R = H; rule = 'Kural: sol iç göz siyah → sola hafif dön.'; }
-        else if (s3)     { L = H; R = Math.trunc(Y / 2); rule = 'Kural: sağ dış göz siyah → sağa sert dön.'; }
-        else if (s2)     { L = H; R = Y; rule = 'Kural: sağ iç göz siyah → sağa hafif dön.'; }
+        const [s0, s1, s2] = eyes;
+        if (s1 && s0 === s2)  { L = H; R = H; rule = 'Kural: orta göz siyah, yanlar aynı → düz git.'; }
+        else if (s0 && s1)    { L = Y; R = H; rule = 'Kural: sol ve orta siyah → sola hafif dön.'; }
+        else if (s0)          { L = Math.trunc(Y / 2); R = H; rule = 'Kural: yalnız sol siyah → sola sert dön.'; }
+        else if (s2 && s1)    { L = H; R = Y; rule = 'Kural: sağ ve orta siyah → sağa hafif dön.'; }
+        else if (s2)          { L = H; R = Math.trunc(Y / 2); rule = 'Kural: yalnız sağ siyah → sağa sert dön.'; }
         else if (lastSide < 0) { L = -A; R = A; rule = 'Çizgi yok → son görüldüğü sol tarafa dönerek ara.'; }
         else if (lastSide > 0) { L = A; R = -A; rule = 'Çizgi yok → son görüldüğü sağ tarafa dönerek ara.'; }
         else             { L = 0; R = 0; rule = 'Çizgi yok, yönü bilinmiyor → dur.'; }
@@ -3511,7 +3517,7 @@ void loop() {
         const D = mode === 'pd' ? kd * (err - prevErr) : 0;
         L = base + P + D; R = base - P - D;
         $('#vP').textContent = P; $('#vD').textContent = D;
-        rule = eyes.some(Boolean) ? '' : 'Çizgi kayıp: hata en uç değer (±4) sayılır, robot son gördüğü tarafa sert döner.';
+        rule = eyes.some(Boolean) ? '' : 'Çizgi kayıp: hata en uç değer (±3) sayılır, robot son gördüğü tarafa sert döner.';
       }
       L = clamp(L); R = clamp(R);
       $('#vErr').textContent = err > 0 ? '+' + err : err;

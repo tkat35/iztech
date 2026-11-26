@@ -1,16 +1,16 @@
 // 13. CIZGI IZLEME: P KONTROL
 // Cizgi ortadan ne kadar uzaksa o kadar cok duzeltir.
-// Hata: en sol -3, ic sol -1, ic sag +1, en sag +3 (goren gozlerin ortalamasi).
+// Hata: sol -2, orta 0, sag +2 (goren gozlerin ortalamasi): -2, -1, 0, +1, +2.
 
 const byte SOL_PWM = 5, SOL_IN1 = 7, SOL_IN2 = 8;
 const byte SAG_PWM = 6, SAG_IN1 = 9, SAG_IN2 = 10;
-const byte CIZGI[4] = {A0, A1, A2, A3};
+const byte CIZGI[3] = {2, 3, 4};   // ALPGEN M052: sol, orta, sag
 const bool SIYAH_LOW = true;
 
 const int TEMEL_HIZ = 100;   // Cizgi tam ortadayken iki tekerin hizi
 const int KP = 25;           // Hata basina duzeltme miktari. Once bunu ayarlayin.
 
-const int AGIRLIK[4] = {-3, -1, 1, 3};
+const int AGIRLIK[3] = {-2, 0, 2};
 const unsigned long ARAMA_MS = 1500;   // Cizgi bu kadar sure gorulmezse dur
 int sonHata = 0;
 unsigned long sonGorulme = 0;          // Cizginin en son goruldugu an
@@ -31,14 +31,14 @@ bool cizgiVar(byte pin) {
   return SIYAH_LOW ? d == LOW : d == HIGH;
 }
 
-// Cizginin ortadan uzakligi: -3 (cok solda) ... 0 (ortada) ... +3 (cok sagda)
+// Cizginin ortadan uzakligi: -2 (cok solda) ... 0 (ortada) ... +2 (cok sagda)
 int hataOku() {
   int toplam = 0, goren = 0;
-  for (byte i = 0; i < 4; i++) {
+  for (byte i = 0; i < 3; i++) {
     if (cizgiVar(CIZGI[i])) { toplam += AGIRLIK[i]; goren++; }
   }
   if (goren == 0) {                 // Cizgi kayip: son gorulen tarafa en sert donus
-    return sonHata < 0 ? -4 : (sonHata > 0 ? 4 : 0);
+    return sonHata < 0 ? -3 : (sonHata > 0 ? 3 : 0);
   }
   sonGorulme = millis();
   sonHata = toplam / goren;
@@ -48,7 +48,7 @@ int hataOku() {
 void setup() {
   pinMode(SOL_PWM, OUTPUT); pinMode(SOL_IN1, OUTPUT); pinMode(SOL_IN2, OUTPUT);
   pinMode(SAG_PWM, OUTPUT); pinMode(SAG_IN1, OUTPUT); pinMode(SAG_IN2, OUTPUT);
-  for (byte i = 0; i < 4; i++) pinMode(CIZGI[i], INPUT);
+  for (byte i = 0; i < 3; i++) pinMode(CIZGI[i], INPUT);
   sur(0, 0);
   delay(3000);
   sonGorulme = millis();
